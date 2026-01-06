@@ -47,20 +47,21 @@ export default function TaskItem({ task, onEdit, onDelete }) {
             style={style}
             {...attributes}
             {...listeners}
-            className={`rounded-lg p-4 shadow cursor-grab select-none ${bgColor}`}
+            className={`aspect-square cursor-grab rounded-[18px] p-6 select-none ${bgColor}`}
         >
-            <div className="flex justify-between items-start">
+            <div className="flex h-full flex-col justify-between">
                 <div className="flex-1">
-                    <p className="text-sm text-gray-800">{task.description}</p>
-                    <p className="text-xs text-gray-700 mt-1 font-medium">
-                        📅{" "}
-                        {task.deadline
-                            ? formatDeadline(task.deadline)
-                            : "No deadline"}
+                    <p className="text-[15px] leading-snug">
+                        {task.description}
                     </p>
                 </div>
 
                 <div className="flex gap-2">
+                    <p className="mt-1 text-xs font-medium text-gray-700">
+                        {task.deadline
+                            ? formatDeadline(task.deadline)
+                            : "No deadline"}
+                    </p>
                     <button
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={() => onEdit(task)}
