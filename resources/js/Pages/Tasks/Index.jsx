@@ -17,15 +17,33 @@ import TaskModal from "@/Components/TaskModal";
 /* ===================== ARCHIVE ZONE ===================== */
 function ArchiveZone() {
     const { setNodeRef, isOver } = useDroppable({ id: "archive" });
-
     return (
         <div
             ref={setNodeRef}
-            className={`rounded border-2 border-dashed p-6 text-center ${
-                isOver ? "border-black text-black" : "text-gray-500"
+            className={`flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 px-6 py-16 ${
+                isOver
+                    ? "border-green-600 bg-green-100 text-black"
+                    : "text-gray-600"
             }`}
         >
-            Drop here to archive
+            <svg
+                width="29"
+                height="30"
+                viewBox="0 0 29 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M25.375 13.32V23.75C25.375 24.413 25.1204 25.0489 24.6672 25.5178C24.214 25.9866 23.5993 26.25 22.9583 26.25H6.04167C5.40073 26.25 4.78604 25.9866 4.33283 25.5178C3.87961 25.0489 3.625 24.413 3.625 23.75V6.25C3.625 5.58696 3.87961 4.95107 4.33283 4.48223C4.78604 4.01339 5.40073 3.75 6.04167 3.75H20.9573M10.875 13.75L14.5 17.5L26.5833 5"
+                    stroke="#00C950"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+            </svg>
+            <p className="max-w-[190px] pt-3 text-center text-sm">
+                Drag the task here to mark it as done
+            </p>
         </div>
     );
 }
@@ -36,6 +54,19 @@ export default function Index({
     categories = [],
     archivedTasks = [],
 }) {
+    const colorMap = {
+        orange: "bg-orange-300",
+        lime: "bg-lime-300",
+        sky: "bg-sky-300",
+        violet: "bg-violet-300",
+        fuchsia: "bg-fuchsia-300",
+        pink: "bg-pink-300",
+        zinc: "bg-zinc-300",
+        purple: "bg-purple-300",
+        emerald: "bg-emerald-300",
+        green: "bg-green-300",
+    };
+
     const generalCategory = categories.find((c) => c.name === "General");
 
     const [isCreating, setIsCreating] = useState(false);
@@ -167,34 +198,34 @@ export default function Index({
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
                                     d="M10.5238 3.8147e-06C13.0161 3.8147e-06 15.3029 0.848087 17.1071 2.26603L15.748 5.11532C14.406 3.81806 12.5608 3.02025 10.5272 3.02025C6.4157 3.02025 3.08471 6.28186 3.08471 10.3077C3.08471 13.509 5.19354 16.2276 8.12399 17.2064L6.97372 20.0121C2.91011 18.5841 0.00019455 14.7795 0.00019455 10.3077C0.00019455 4.61586 4.71083 0.003356 10.5238 0.003356V3.8147e-06Z"
                                     fill="black"
                                 />
                                 <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
                                     d="M19.2434 4.52869C20.3834 6.17458 21.0509 8.16573 21.0509 10.3044C21.0509 15.9963 16.3403 20.6088 10.5273 20.6088C9.70569 20.6088 8.9046 20.5149 8.13776 20.3406L9.30515 17.4913C9.70226 17.555 10.1097 17.5885 10.5273 17.5885C14.6388 17.5885 17.9698 14.3269 17.9698 10.301C17.9698 9.61384 17.8706 8.94677 17.6891 8.31657L19.2434 4.52534V4.52869Z"
                                     fill="black"
                                 />
                                 <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
                                     d="M14.2757 16.5963L12.7249 20.3808C12.2764 20.4747 11.8142 20.5417 11.3452 20.5752C11.3521 20.5752 11.3555 20.5752 11.3624 20.5752L12.718 17.2667C13.2692 17.1025 13.7896 16.8745 14.2791 16.5963H14.2757Z"
                                     fill="black"
-                                    fill-opacity="0.14902"
+                                    fillOpacity="0.14902"
                                 />
                                 <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
                                     d="M4.26212 18.5874C3.9232 18.3394 3.59797 18.0746 3.28986 17.7896L4.5668 14.6755C4.83041 15.0208 5.12482 15.3392 5.4432 15.6342L4.23815 18.574L4.25869 18.5908L4.26212 18.5874Z"
                                     fill="black"
-                                    fill-opacity="0.14902"
+                                    fillOpacity="0.14902"
                                 />
                                 <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
                                     d="M8.4494 8.30317L4.242 18.5707C5.06705 19.1741 5.98453 19.6601 6.9739 20.0054L7.16219 19.5461L11.7736 8.30317H8.45282H8.4494ZM11.3593 20.5752L12.715 17.2667L16.8231 7.24726L18.3808 3.44597L19.6098 0.449181H16.3301L16.2891 0.452533L15.8885 1.43135L14.7211 4.28064L9.30526 17.4879L8.13787 20.3372C8.90472 20.5116 9.69895 20.6021 10.5206 20.6054C10.6096 20.6054 10.6986 20.6054 10.7876 20.6021H10.8013C10.8835 20.5987 10.9656 20.5954 11.0478 20.592L11.0854 20.5886C11.1608 20.5853 11.2326 20.5786 11.308 20.5752C11.3251 20.5752 11.3422 20.5719 11.3593 20.5719V20.5752Z"
                                     fill="black"
                                 />
@@ -250,7 +281,7 @@ export default function Index({
                                 items={items.map((t) => t.id)}
                                 strategy={rectSortingStrategy}
                             >
-                                <div className="grid grid-cols-4 gap-7">
+                                <div className="grid grid-cols-4 gap-6">
                                     {items.length === 0 && (
                                         <p className="text-sm text-gray-500">
                                             No tasks yet.
@@ -267,15 +298,12 @@ export default function Index({
                                     ))}
                                 </div>
                             </SortableContext>
-
-                            {/* ARCHIVE DROP ZONE */}
-                            <ArchiveZone />
                         </div>
 
                         {/* DRAG PREVIEW */}
                         <DragOverlay>
                             {activeTask ? (
-                                <div className="aspect-square cursor-grab rounded-[18px] bg-white/40 p-6 backdrop-blur-md select-none">
+                                <div className="aspect-square cursor-grab rounded-[18px] border border-gray-300 bg-white/40 p-6 backdrop-blur-md select-none">
                                     {activeTask.description && (
                                         <p className="text-[15px] leading-snug text-gray-800">
                                             {activeTask.description}
@@ -284,36 +312,6 @@ export default function Index({
                                 </div>
                             ) : null}
                         </DragOverlay>
-
-                        <div className="mt-8">
-                            <h2 className="mb-3 text-lg font-semibold text-gray-700">
-                                Recently Archived
-                            </h2>
-
-                            {archivedTasks.length === 0 ? (
-                                <p className="text-sm text-gray-500">
-                                    No archived tasks yet.
-                                </p>
-                            ) : (
-                                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                                    {archivedTasks.map((task) => (
-                                        <div
-                                            key={task.id}
-                                            className="rounded-lg bg-gray-100 p-3 text-sm opacity-80"
-                                        >
-                                            <p className="font-medium text-gray-800 line-through">
-                                                {task.description}
-                                            </p>
-                                            {task.deadline && (
-                                                <p className="mt-1 text-xs text-gray-500">
-                                                    Deadline: {task.deadline}
-                                                </p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
 
                         {/* ================= CREATE MODAL ================= */}
                         {showCreate && (
@@ -414,6 +412,15 @@ export default function Index({
 
                                     <div className="flex justify-end gap-2">
                                         <button
+                                            onPointerDown={(e) =>
+                                                e.stopPropagation()
+                                            }
+                                            onClick={() => onDelete(data.id)}
+                                            className="text-red-600 hover:underline"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
                                             type="button"
                                             onClick={() => setEditingTask(null)}
                                             className="rounded border px-3 py-1"
@@ -432,7 +439,40 @@ export default function Index({
                             </TaskModal>
                         )}
                     </div>
-                    <div className="w-[396px] bg-white"></div>
+                    <div className="h-svh w-[396px] bg-white p-6">
+                        {/* ARCHIVE DROP ZONE */}
+                        <ArchiveZone />
+                        <div>
+                            <p className="pt-5 pb-4 font-medium">
+                                Last 5 task done
+                            </p>
+                            <div>
+                                {archivedTasks.length === 0 ? (
+                                    <p className="text-sm text-gray-500">
+                                        No archived tasks yet.
+                                    </p>
+                                ) : (
+                                    <div className="space-y-3">
+                                        {archivedTasks.map((task) => {
+                                            const bgColor =
+                                                colorMap[task.color] ||
+                                                "bg-gray-100";
+                                            return (
+                                                <div
+                                                    key={task.id}
+                                                    className={`min-h-[65px] rounded-lg px-5 py-4 text-sm opacity-80 ${bgColor}`}
+                                                >
+                                                    <p className="line-clamp-2 text-[13px] leading-snug">
+                                                        {task.description}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </DndContext>
