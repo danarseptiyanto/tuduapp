@@ -240,7 +240,7 @@ export default function Index({
                                 <button
                                     onClick={() => setShowCreate(true)}
                                     disabled={isCreating}
-                                    className={`flex h-[40px] cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400 ${
+                                    className={`flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400 ${
                                         isCreating
                                             ? "cursor-not-allowed bg-gray-400"
                                             : "bg-black"
@@ -332,44 +332,56 @@ export default function Index({
                                                 e.target.value,
                                             )
                                         }
-                                        className="w-full rounded border px-2 py-1"
+                                        rows={10}
+                                        className="text-heading rounded-base block w-full rounded-xl border border-gray-300 bg-white p-3.5 text-sm"
                                         required
                                     />
 
-                                    <input
-                                        type="date"
-                                        value={createForm.data.deadline}
-                                        onChange={(e) =>
-                                            createForm.setData(
-                                                "deadline",
-                                                e.target.value,
-                                            )
-                                        }
-                                        className="rounded border px-2 py-1"
-                                    />
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="date"
+                                                value={createForm.data.deadline}
+                                                onChange={(e) =>
+                                                    createForm.setData(
+                                                        "deadline",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="text-heading rounded-base block h-10 rounded-full border border-gray-300 bg-white px-3 py-1 text-sm"
+                                            />
+                                            <label
+                                                htmlFor="deadline"
+                                                className="text-xs leading-none text-gray-500"
+                                            >
+                                                Deadline
+                                            </label>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setShowCreate(false)
+                                                }
+                                                className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400"
+                                            >
+                                                Cancel
+                                            </button>
 
-                                    <div className="flex justify-end gap-2">
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowCreate(false)}
-                                            className="rounded border px-3 py-1"
-                                        >
-                                            Cancel
-                                        </button>
-
-                                        <button
-                                            type="submit"
-                                            disabled={isCreating}
-                                            className={`w-full rounded py-2 ${
-                                                isCreating
-                                                    ? "cursor-not-allowed bg-gray-400"
-                                                    : "bg-black text-white"
-                                            }`}
-                                        >
-                                            {isCreating
-                                                ? "Saving..."
-                                                : "Create Task"}
-                                        </button>
+                                            <button
+                                                type="submit"
+                                                disabled={isCreating}
+                                                className={`flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap transition-all hover:bg-gray-400 ${
+                                                    isCreating
+                                                        ? "cursor-not-allowed bg-gray-400"
+                                                        : " text-black"
+                                                }`}
+                                            >
+                                                {isCreating
+                                                    ? "Saving..."
+                                                    : "Create Task"}
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </TaskModal>
@@ -394,52 +406,55 @@ export default function Index({
                                                 e.target.value,
                                             )
                                         }
-                                        className="w-full rounded border px-2 py-1"
+                                        rows={10}
+                                        className="text-heading rounded-base block w-full rounded-xl border border-gray-300 bg-white p-3.5 text-sm"
                                         required
                                     />
 
-                                    <input
-                                        type="date"
-                                        value={editForm.data.deadline}
-                                        onChange={(e) =>
-                                            editForm.setData(
-                                                "deadline",
-                                                e.target.value,
-                                            )
-                                        }
-                                        className="rounded border px-2 py-1"
-                                    />
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="date"
+                                                value={editForm.data.deadline}
+                                                onChange={(e) =>
+                                                    editForm.setData(
+                                                        "deadline",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="text-heading rounded-base block h-10 rounded-full border border-gray-300 bg-white px-3 py-1 text-sm"
+                                            />
+                                            <label
+                                                htmlFor="deadline"
+                                                className="text-xs leading-none text-gray-500"
+                                            >
+                                                Deadline
+                                            </label>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setEditingTask(null)
+                                                }
+                                                className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400"
+                                            >
+                                                Cancel
+                                            </button>
 
-                                    <div className="flex justify-end gap-2">
-                                        <button
-                                            onPointerDown={(e) =>
-                                                e.stopPropagation()
-                                            }
-                                            onClick={() => onDelete(data.id)}
-                                            className="text-red-600 hover:underline"
-                                        >
-                                            Delete
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setEditingTask(null)}
-                                            className="rounded border px-3 py-1"
-                                        >
-                                            Cancel
-                                        </button>
-
-                                        <button
-                                            type="submit"
-                                            className="rounded bg-black px-4 py-1 text-white"
-                                        >
-                                            Save
-                                        </button>
+                                            <button
+                                                type="submit"
+                                                className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
+                                            >
+                                                Save Task
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </TaskModal>
                         )}
                     </div>
-                    <div className="h-svh w-[396px] bg-white p-6">
+                    <div className="sticky top-0 h-svh w-[396px] bg-white p-6">
                         {/* ARCHIVE DROP ZONE */}
                         <ArchiveZone />
                         <div>
