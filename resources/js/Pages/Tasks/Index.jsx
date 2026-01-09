@@ -120,7 +120,7 @@ export default function Index({
         setEditingTask(task);
         editForm.setData({
             description: task.description || "",
-            deadline: task.deadline ? task.deadline.split("T")[0] : "",
+            deadline: task.deadline ? task.deadline.substring(0, 16) : "",
         });
     }
 
@@ -367,7 +367,7 @@ export default function Index({
                                 </form>
                                 <div className="absolute bottom-20 flex w-full flex-col-reverse gap-1.5 pr-[44px] pl-[11px]">
                                     <input
-                                        type="date"
+                                        type="datetime-local"
                                         value={createForm.data.deadline}
                                         onChange={(e) =>
                                             createForm.setData(
@@ -446,7 +446,7 @@ export default function Index({
                                 </form>
                                 <div className="absolute bottom-20 flex w-full flex-col-reverse gap-1.5 pr-[44px] pl-[11px]">
                                     <input
-                                        type="date"
+                                        type="datetime-local"
                                         value={editForm.data.deadline}
                                         onChange={(e) =>
                                             editForm.setData(

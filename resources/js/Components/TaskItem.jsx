@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useState, useEffect } from "react";
 
 const colorMap = {
     orange: "bg-orange-300",
@@ -32,14 +33,42 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         opacity: isDragging ? 0.6 : 1,
     };
 
-    // Format deadline as "12 Jan" or "1 Mar"
-    const formatDeadline = (deadline) => {
-        if (!deadline) return null;
-        const date = new Date(deadline);
-        const day = date.getDate();
-        const month = date.toLocaleString("en-US", { month: "short" });
-        return `${day} ${month}`;
-    };
+    const [timeLeft, setTimeLeft] = useState("");
+
+    useEffect(() => {
+        if (!task.deadline) {
+            setTimeLeft("No deadline");
+            return;
+        }
+
+        const updateTimer = () => {
+            const now = new Date();
+            const date = new Date(task.deadline);
+            const diff = date - now;
+
+            if (diff <= 0) {
+                setTimeLeft("Overdue");
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            );
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            let result = "";
+            if (days > 0) result += `${days}d `;
+            if (hours > 0 || days > 0) result += `${hours}h `;
+            result += `${minutes}m`;
+            setTimeLeft(result);
+        };
+
+        updateTimer();
+        const intervalId = setInterval(updateTimer, 60000); // Update every minute
+
+        return () => clearInterval(intervalId);
+    }, [task.deadline]);
 
     return (
         <div
@@ -56,11 +85,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                     </p>
                 </div>
                 <div className="flex justify-between gap-2 pr-3.5 pb-3.5 pl-6">
-                    <p className="mt-1 text-xs font-light">
-                        {task.deadline
-                            ? formatDeadline(task.deadline)
-                            : "No deadline"}
-                    </p>
+                    <p className="mt-1 text-xs font-light">{timeLeft}</p>
                     <button
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={() => onEdit(task)}
