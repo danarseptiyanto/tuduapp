@@ -51,7 +51,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         >
             <div className="flex h-full flex-col justify-between">
                 <div className="flex-1 px-6 pt-6">
-                    <p className="text-[15px] leading-snug">
+                    <p className="text-[14px] leading-snug">
                         {task.description}
                     </p>
                 </div>

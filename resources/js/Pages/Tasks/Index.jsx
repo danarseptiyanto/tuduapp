@@ -424,12 +424,12 @@ export default function Index({
                                                 }
                                                 className="text-heading rounded-base block h-10 rounded-full border border-gray-300 bg-white px-3 py-1 text-sm"
                                             />
-                                            <label
+                                            {/* <label
                                                 htmlFor="deadline"
                                                 className="text-xs leading-none text-gray-500"
                                             >
                                                 Deadline
-                                            </label>
+                                            </label> */}
                                         </div>
                                         <div className="flex gap-2">
                                             <button
@@ -441,12 +441,24 @@ export default function Index({
                                             >
                                                 Cancel
                                             </button>
-
+                                            <button
+                                                type="button"
+                                                onPointerDown={(e) =>
+                                                    e.stopPropagation()
+                                                }
+                                                onClick={() => {
+                                                    deleteTask(editingTask.id);
+                                                    setEditingTask(null);
+                                                }}
+                                                className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-red-500 px-5 text-sm font-medium text-white transition-all hover:bg-red-600"
+                                            >
+                                                Delete
+                                            </button>
                                             <button
                                                 type="submit"
                                                 className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
                                             >
-                                                Save Task
+                                                Save
                                             </button>
                                         </div>
                                     </div>
@@ -454,7 +466,7 @@ export default function Index({
                             </TaskModal>
                         )}
                     </div>
-                    <div className="sticky top-0 h-svh w-[396px] bg-white p-6">
+                    <div className="h-svh w-[396px] bg-white p-6">
                         {/* ARCHIVE DROP ZONE */}
                         <ArchiveZone />
                         <div>
