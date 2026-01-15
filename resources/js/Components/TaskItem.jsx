@@ -43,7 +43,15 @@ export default function TaskItem({ task, onEdit, onDelete }) {
 
         const updateTimer = () => {
             const now = new Date();
-            const date = new Date(task.deadline);
+
+            // Treat as "Floating Time": ignore the 'Z' (UTC) if present.
+            // This forces the browser to interpret the time string as local time.
+            let dateString = task.deadline;
+            if (dateString.endsWith("Z")) {
+                dateString = dateString.slice(0, -1);
+            }
+
+            const date = new Date(dateString);
             const diff = date - now;
 
             if (diff <= 0) {
