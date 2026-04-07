@@ -237,43 +237,73 @@ export default function Index({
                                 <h1 className="text-3xl font-semibold">
                                     Hi Danar Septiyanto 👋
                                 </h1>
-                                <button
-                                    onClick={() => setShowCreate(true)}
-                                    disabled={isCreating}
-                                    className={`flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400 ${
-                                        isCreating
-                                            ? "cursor-not-allowed bg-gray-400"
-                                            : "bg-black"
-                                    }`}
-                                >
-                                    {isCreating ? (
-                                        <>
-                                            <svg
-                                                className="h-4 w-4 animate-spin text-white"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <circle
-                                                    className="opacity-25"
-                                                    cx="12"
-                                                    cy="12"
-                                                    r="10"
-                                                    stroke="currentColor"
-                                                    strokeWidth="4"
-                                                ></circle>
-                                                <path
-                                                    className="opacity-75"
-                                                    fill="currentColor"
-                                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                                                ></path>
-                                            </svg>
-                                            Creating...
-                                        </>
-                                    ) : (
-                                        "Add Task"
-                                    )}
-                                </button>
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        onClick={() => setShowCreate(true)}
+                                        disabled={isCreating}
+                                        className={`flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400 ${
+                                            isCreating
+                                                ? "cursor-not-allowed bg-gray-400"
+                                                : "bg-black"
+                                        }`}
+                                    >
+                                        {isCreating ? (
+                                            <>
+                                                <svg
+                                                    className="h-4 w-4 animate-spin text-white"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle
+                                                        className="opacity-25"
+                                                        cx="12"
+                                                        cy="12"
+                                                        r="10"
+                                                        stroke="currentColor"
+                                                        strokeWidth="4"
+                                                    ></circle>
+                                                    <path
+                                                        className="opacity-75"
+                                                        fill="currentColor"
+                                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                                    ></path>
+                                                </svg>
+                                                Creating...
+                                            </>
+                                        ) : (
+                                            "Add Task"
+                                        )}
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            router.post(route("logout"))
+                                        }
+                                        className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-100 px-5 text-sm font-medium text-gray-600 transition-all hover:bg-red-100 hover:text-red-600"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                            <polyline points="16 17 21 12 16 7" />
+                                            <line
+                                                x1="21"
+                                                y1="12"
+                                                x2="9"
+                                                y2="12"
+                                            />
+                                        </svg>
+                                        Logout
+                                    </button>
+                                </div>
                             </div>
 
                             {/* SORTABLE LIST */}
@@ -487,7 +517,7 @@ export default function Index({
                                             return (
                                                 <div
                                                     key={task.id}
-                                                    className={`min-h-[65px] rounded-lg px-5 py-4 text-sm opacity-80 ${bgColor}`}
+                                                    className={`min-h-[65px] rounded-xl px-5 py-4 text-sm opacity-80 ${bgColor}`}
                                                 >
                                                     <p className="line-clamp-2 text-[13px] leading-snug">
                                                         {task.description}
