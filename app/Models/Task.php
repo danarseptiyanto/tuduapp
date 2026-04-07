@@ -18,6 +18,6 @@ class Task extends Model
 
     protected $casts = [
         'archived' => 'boolean',
-        'deadline' => 'date',
+        'deadline' => 'datetime',
     ];
 }

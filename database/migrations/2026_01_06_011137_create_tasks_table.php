@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
 
             $table->text('description')->nullable();
-            $table->date('deadline')->nullable();
+            $table->dateTime('deadline')->nullable();
 
             $table->boolean('archived')->default(false);
             $table->integer('order')->default(0);
