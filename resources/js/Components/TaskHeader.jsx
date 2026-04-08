@@ -1,10 +1,10 @@
 import { router, Link } from "@inertiajs/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-export default function TaskHeader({ onAddTask, isCreating }) {
+export default function TaskHeader({ onAddTask, isCreating, userName }) {
     return (
         <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-semibold">Hi Danar Septiyanto 👋</h1>
+            <h1 className="text-3xl font-semibold">Hi {userName} 👋</h1>
             <div className="flex items-center gap-2">
                 <button
                     onClick={onAddTask}

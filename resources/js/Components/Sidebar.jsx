@@ -13,7 +13,7 @@ const colorMap = {
     green: "bg-green-300",
 };
 
-export default function Sidebar({ archivedTasks = [] }) {
+export default function Sidebar({ archivedTasks = [], onUnarchive }) {
     return (
         <div className="h-svh w-[396px] bg-white p-6">
             {/* ARCHIVE DROP ZONE */}
@@ -38,6 +38,12 @@ export default function Sidebar({ archivedTasks = [] }) {
                                         <p className="line-clamp-2 text-[13px] leading-snug">
                                             {task.description}
                                         </p>
+                                        <button
+                                            onClick={() => onUnarchive(task.id)}
+                                            className="mt-2 text-xs text-gray-600 underline hover:text-gray-800"
+                                        >
+                                            Restore
+                                        </button>
                                     </div>
                                 );
                             })}

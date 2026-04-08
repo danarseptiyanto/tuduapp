@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\TaskController;
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -18,7 +18,6 @@ use App\Http\Controllers\TaskController;
 Route::get('/', function () {
     return redirect()->route('tasks.index');
 });
-
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -37,8 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/tasks/{task}', [TaskController::class, 'update']);
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
     Route::post('/tasks/{task}/archive', [TaskController::class, 'archive']);
+    Route::post('/tasks/{task}/unarchive', [TaskController::class, 'unarchive']);
     Route::post('/tasks/reorder', [TaskController::class, 'reorder']);
 });
 
-
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

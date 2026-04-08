@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Category;
 
 class TaskController extends Controller
 {
@@ -24,6 +24,7 @@ class TaskController extends Controller
                 ->orderByDesc('updated_at')
                 ->limit(5)
                 ->get(),
+            'user' => $user,
         ]);
     }
 
@@ -39,7 +40,7 @@ class TaskController extends Controller
 
         // Default "General" category
         $categoryId = $request->category_id;
-        if (!$categoryId) {
+        if (! $categoryId) {
             $categoryId = Category::where('user_id', $userId)
                 ->where('name', 'General')
                 ->value('id');
@@ -61,14 +62,12 @@ class TaskController extends Controller
             'description' => $request->description,
             'deadline' => $request->deadline,
             'archived' => false,
-            'order' => 1,
+            'order' => 0,
             'color' => $randomColor,   // 👈 persisted
         ]);
 
         return redirect()->back();
     }
-
-
 
     public function update(Task $task, Request $request)
     {
@@ -103,6 +102,17 @@ class TaskController extends Controller
         }
 
         $task->update(['archived' => true]);
+
+        return back();
+    }
+
+    public function unarchive(Task $task)
+    {
+        if ($task->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $task->update(['archived' => false]);
 
         return back();
     }

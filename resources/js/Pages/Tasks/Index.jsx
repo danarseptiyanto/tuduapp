@@ -18,6 +18,7 @@ export default function Index({
     tasks = [],
     categories = [],
     archivedTasks = [],
+    user = {},
 }) {
     const generalCategory = categories.find((c) => c.name === "General");
 
@@ -35,6 +36,11 @@ export default function Index({
     function deleteTask(id) {
         setItems((prev) => prev.filter((t) => t.id !== id)); // optimistic
         router.delete(`/tasks/${id}`);
+    }
+
+    /* ===== UNARCHIVE ===== */
+    function unarchiveTask(id) {
+        router.post(`/tasks/${id}/unarchive`);
     }
 
     /* ===== DND ===== */
@@ -92,6 +98,7 @@ export default function Index({
                             <TaskHeader
                                 onAddTask={() => setShowCreate(true)}
                                 isCreating={false}
+                                userName={user.name}
                             />
 
                             {/* SORTABLE LIST */}
@@ -126,9 +133,7 @@ export default function Index({
                             <CreateTaskModal
                                 onClose={() => setShowCreate(false)}
                                 defaultCategoryId={
-                                    generalCategory
-                                        ? generalCategory.id
-                                        : ""
+                                    generalCategory ? generalCategory.id : ""
                                 }
                             />
                         )}
@@ -142,7 +147,10 @@ export default function Index({
                             />
                         )}
                     </div>
-                    <Sidebar archivedTasks={archivedTasks} />
+                    <Sidebar
+                        archivedTasks={archivedTasks}
+                        onUnarchive={unarchiveTask}
+                    />
                 </div>
             </div>
         </DndContext>
