@@ -13,6 +13,7 @@ import CreateTaskModal from "@/Components/CreateTaskModal";
 import EditTaskModal from "@/Components/EditTaskModal";
 import DragPreview from "@/Components/DragPreview";
 import Sidebar from "@/Components/Sidebar";
+import LoginLayout from "@/Layouts/LoginLayout";
 
 export default function Index({
     tasks = [],
@@ -84,75 +85,92 @@ export default function Index({
     }
 
     return (
-        <DndContext
-            collisionDetection={closestCenter}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-        >
-            <div className="bg-[#F8F6F5]">
-                <div className="mx-auto flex max-w-[1540px] justify-between">
-                    <div className="mx-14 w-[1025px] pt-7">
-                        <TuduLogo />
-                        <div className="mx-auto space-y-8 py-9">
-                            {/* HEADER */}
-                            <TaskHeader
-                                onAddTask={() => setShowCreate(true)}
-                                isCreating={false}
-                                userName={user.name}
-                            />
+        <LoginLayout>
+            <DndContext
+                collisionDetection={closestCenter}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+            >
+                <div className="bg-[#F8F6F5]">
+                    <div className="mx-auto flex max-w-[1540px] justify-between">
+                        <div className="mx-14 w-[1025px] pt-7">
+                            <TuduLogo />
+                            <div className="mx-auto space-y-8 py-9">
+                                {/* HEADER */}
+                                <TaskHeader
+                                    onAddTask={() => setShowCreate(true)}
+                                    isCreating={false}
+                                    userName={user.name}
+                                />
 
-                            {/* SORTABLE LIST */}
-                            <SortableContext
-                                items={items.map((t) => t.id)}
-                                strategy={rectSortingStrategy}
-                            >
-                                <div className="grid grid-cols-4 gap-6">
+                                {/* SORTABLE LIST */}
+                                <SortableContext
+                                    items={items.map((t) => t.id)}
+                                    strategy={rectSortingStrategy}
+                                >
                                     {items.length === 0 && (
-                                        <p className="text-sm text-gray-500">
-                                            No tasks yet.
-                                        </p>
+                                        <div className="flex h-max w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#F9C974]/50 py-24">
+                                            <p className="text-9xl text-gray-500">
+                                                \(-_-)/
+                                            </p>
+                                            <p className="mt-9 text-sm text-gray-500">
+                                                You have no task.
+                                            </p>
+
+                                            <button
+                                                onClick={() =>
+                                                    setShowCreate(true)
+                                                }
+                                                className="mt-4 flex h-10 cursor-pointer items-center gap-2 rounded-full border border-gray-400 px-5 text-sm font-medium whitespace-nowrap text-gray-700 transition-all hover:bg-gray-300"
+                                            >
+                                                Add a new Task
+                                            </button>
+                                        </div>
                                     )}
+                                    <div className="grid grid-cols-4 gap-6">
+                                        {items.map((task) => (
+                                            <TaskItem
+                                                key={task.id}
+                                                task={task}
+                                                onEdit={setEditingTask}
+                                                onDelete={deleteTask}
+                                            />
+                                        ))}
+                                    </div>
+                                </SortableContext>
+                            </div>
 
-                                    {items.map((task) => (
-                                        <TaskItem
-                                            key={task.id}
-                                            task={task}
-                                            onEdit={setEditingTask}
-                                            onDelete={deleteTask}
-                                        />
-                                    ))}
-                                </div>
-                            </SortableContext>
+                            {/* DRAG PREVIEW */}
+                            <DragPreview activeTask={activeTask} />
+
+                            {/* CREATE MODAL */}
+                            {showCreate && (
+                                <CreateTaskModal
+                                    onClose={() => setShowCreate(false)}
+                                    defaultCategoryId={
+                                        generalCategory
+                                            ? generalCategory.id
+                                            : ""
+                                    }
+                                />
+                            )}
+
+                            {/* EDIT MODAL */}
+                            {editingTask && (
+                                <EditTaskModal
+                                    task={editingTask}
+                                    onClose={() => setEditingTask(null)}
+                                    onDelete={deleteTask}
+                                />
+                            )}
                         </div>
-
-                        {/* DRAG PREVIEW */}
-                        <DragPreview activeTask={activeTask} />
-
-                        {/* CREATE MODAL */}
-                        {showCreate && (
-                            <CreateTaskModal
-                                onClose={() => setShowCreate(false)}
-                                defaultCategoryId={
-                                    generalCategory ? generalCategory.id : ""
-                                }
-                            />
-                        )}
-
-                        {/* EDIT MODAL */}
-                        {editingTask && (
-                            <EditTaskModal
-                                task={editingTask}
-                                onClose={() => setEditingTask(null)}
-                                onDelete={deleteTask}
-                            />
-                        )}
+                        <Sidebar
+                            archivedTasks={archivedTasks}
+                            onUnarchive={unarchiveTask}
+                        />
                     </div>
-                    <Sidebar
-                        archivedTasks={archivedTasks}
-                        onUnarchive={unarchiveTask}
-                    />
                 </div>
-            </div>
-        </DndContext>
+            </DndContext>
+        </LoginLayout>
     );
 }

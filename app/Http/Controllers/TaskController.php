@@ -66,7 +66,7 @@ class TaskController extends Controller
             'color' => $randomColor,   // 👈 persisted
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Task created successfully!');
     }
 
     public function update(Task $task, Request $request)
@@ -82,7 +82,7 @@ class TaskController extends Controller
             ])
         );
 
-        return back();
+        return back()->with('success', 'Task updated successfully!');
     }
 
     public function destroy(Task $task)
@@ -92,7 +92,7 @@ class TaskController extends Controller
         }
         $task->delete();
 
-        return back();
+        return back()->with('success', 'Task deleted successfully!');
     }
 
     public function archive(Task $task)
@@ -103,7 +103,7 @@ class TaskController extends Controller
 
         $task->update(['archived' => true]);
 
-        return back();
+        return back()->with('success', 'Task archived successfully!');
     }
 
     public function unarchive(Task $task)
@@ -114,7 +114,7 @@ class TaskController extends Controller
 
         $task->update(['archived' => false]);
 
-        return back();
+        return back()->with('success', 'Task unarchived successfully!');
     }
 
     public function reorder(Request $request)
