@@ -175,7 +175,7 @@ export default function Index({
                         />
                     </div>
                 </div>
-                <div className="sticky bottom-0 left-0 block w-full rounded-3xl bg-white p-2 md:hidden">
+                <div className="fixed bottom-0 left-0 block w-full rounded-3xl bg-white p-2 md:hidden">
                     <ArchiveZone />
                 </div>
             </DndContext>
