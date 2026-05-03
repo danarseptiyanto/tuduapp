@@ -86,7 +86,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
             {...listeners}
             className={`aspect-square cursor-grab rounded-[18px] select-none ${bgColor}`}
         >
-            <div className="flex h-full flex-col justify-between">
+            <div className="flex h-full touch-none flex-col justify-between">
                 <div className="flex-1 px-4 pt-4 md:px-6 md:pt-6">
                     <p className="line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
                         {task.description}
