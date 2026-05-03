@@ -95,7 +95,7 @@ export default function Index({
             >
                 <div className="bg-[#F8F6F5]">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
-                        <div className="mx-6 min-h-lvh w-[1025px] pt-7 md:mx-14">
+                        <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
                             <TuduLogo />
                             <div className="mx-auto space-y-8 py-9">
                                 {/* HEADER */}
