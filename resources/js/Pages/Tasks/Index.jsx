@@ -9,11 +9,13 @@ import { useState, useEffect } from "react";
 import TaskItem from "@/Components/TaskItem";
 import TuduLogo from "@/Components/TuduLogo";
 import TaskHeader from "@/Components/TaskHeader";
+import CreateTaskMobile from "@/Components/CreateTaskMobile";
 import CreateTaskModal from "@/Components/CreateTaskModal";
 import EditTaskModal from "@/Components/EditTaskModal";
 import DragPreview from "@/Components/DragPreview";
 import Sidebar from "@/Components/Sidebar";
 import LoginLayout from "@/Layouts/LoginLayout";
+import ArchiveZone from "@/Components/ArchiveZone";
 
 export default function Index({
     tasks = [],
@@ -93,7 +95,7 @@ export default function Index({
             >
                 <div className="bg-[#F8F6F5]">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
-                        <div className="mx-14 w-[1025px] pt-7">
+                        <div className="mx-6 min-h-lvh w-[1025px] pt-7 md:mx-14">
                             <TuduLogo />
                             <div className="mx-auto space-y-8 py-9">
                                 {/* HEADER */}
@@ -101,6 +103,9 @@ export default function Index({
                                     onAddTask={() => setShowCreate(true)}
                                     isCreating={false}
                                     userName={user.name}
+                                />
+                                <CreateTaskMobile
+                                    onAddTask={() => setShowCreate(true)}
                                 />
 
                                 {/* SORTABLE LIST */}
@@ -127,7 +132,7 @@ export default function Index({
                                             </button>
                                         </div>
                                     )}
-                                    <div className="grid grid-cols-4 gap-6">
+                                    <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
                                         {items.map((task) => (
                                             <TaskItem
                                                 key={task.id}
@@ -169,6 +174,9 @@ export default function Index({
                             onUnarchive={unarchiveTask}
                         />
                     </div>
+                </div>
+                <div className="sticky bottom-0 left-0 block w-full rounded-3xl bg-white p-2 md:hidden">
+                    <ArchiveZone />
                 </div>
             </DndContext>
         </LoginLayout>

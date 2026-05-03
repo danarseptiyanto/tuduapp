@@ -15,7 +15,7 @@ const colorMap = {
 
 export default function Sidebar({ archivedTasks = [], onUnarchive }) {
     return (
-        <div className="h-svh w-[396px] bg-white p-6">
+        <div className="hidden h-svh w-[396px] bg-white p-6 md:block">
             {/* ARCHIVE DROP ZONE */}
             <ArchiveZone />
             <div>
