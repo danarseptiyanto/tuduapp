@@ -1,10 +1,17 @@
 import { router } from "@inertiajs/react";
-import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
     SortableContext,
     rectSortingStrategy,
     arrayMove,
 } from "@dnd-kit/sortable";
+import {
+    DndContext,
+    closestCenter,
+    useSensor,
+    useSensors,
+    PointerSensor,
+    TouchSensor,
+} from "@dnd-kit/core";
 import { useState, useEffect } from "react";
 import TaskItem from "@/Components/TaskItem";
 import TuduLogo from "@/Components/TuduLogo";
@@ -23,6 +30,15 @@ export default function Index({
     archivedTasks = [],
     user = {},
 }) {
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                delay: 250, // 250ms press delay
+                tolerance: 5, // Drag cancels if they move more than 5px during the delay
+            },
+        }),
+    );
+
     const generalCategory = categories.find((c) => c.name === "General");
 
     /* ===== LOCAL STATE ===== */
@@ -92,6 +108,7 @@ export default function Index({
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
+                sensors={sensors}
             >
                 <div className="bg-[#F8F6F5]">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
