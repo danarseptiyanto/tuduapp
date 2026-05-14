@@ -36,5 +36,35 @@ Route::middleware('auth')->group(function () {
     Route::post('/tasks/{task}/unarchive', [TaskController::class, 'unarchive']);
     Route::post('/tasks/reorder', [TaskController::class, 'reorder']);
 });
+Route::get('/manifest.webmanifest', function () {
+    $path = public_path('build/manifest.webmanifest');
+    
+    abort_if(!file_exists($path), 404);
+    
+    return response()->file($path, [
+        'Content-Type' => 'application/manifest+json',
+    ]);
+});
+
+Route::get('/sw.js', function () {
+    $path = public_path('build/sw.js');
+
+    abort_if(!file_exists($path), 404);
+
+    return response()->file($path, [
+        'Content-Type' => 'application/javascript',
+        'Service-Worker-Allowed' => '/',
+    ]);
+});
+
+Route::get('/workbox-{file}', function (string $file) {
+    $path = public_path('build/workbox-' . $file);
+
+    abort_if(!file_exists($path), 404);
+
+    return response()->file($path, [
+        'Content-Type' => 'application/javascript',
+    ]);
+});
 
 require __DIR__.'/auth.php';
