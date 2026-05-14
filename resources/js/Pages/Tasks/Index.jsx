@@ -1,4 +1,4 @@
-import { router } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import {
     SortableContext,
     rectSortingStrategy,
@@ -123,6 +123,7 @@ export default function Index({
                 onDragEnd={handleDragEnd}
                 sensors={sensors}
             >
+                <Head title="Tasks - Tudus" />
                 <div className="bg-[#F8F6F5]">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
                         <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
@@ -137,21 +138,19 @@ export default function Index({
                                 <CreateTaskMobile
                                     onAddTask={() => setShowCreate(true)}
                                 />
-
                                 {/* SORTABLE LIST */}
                                 <SortableContext
                                     items={items.map((t) => t.id)}
                                     strategy={rectSortingStrategy}
                                 >
                                     {items.length === 0 && (
-                                        <div className="flex h-max w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#F9C974]/50 py-24">
-                                            <p className="text-9xl text-gray-500">
+                                        <div className="flex h-[calc(100dvh-13rem)] w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#F9C974]/50 py-24 md:h-max">
+                                            <p className="text-5xl text-gray-500 md:text-9xl">
                                                 \(-_-)/
                                             </p>
                                             <p className="mt-9 text-sm text-gray-500">
                                                 You have no task.
                                             </p>
-
                                             <button
                                                 onClick={() =>
                                                     setShowCreate(true)
@@ -203,7 +202,7 @@ export default function Index({
                             archivedTasks={archivedTasks}
                             onUnarchive={unarchiveTask}
                         >
-                            <div className="fixed bottom-0 left-0 z-20 block w-full rounded-t-3xl bg-white p-2 md:static">
+                            <div className="fixed bottom-0 left-0 z-20 block w-full rounded-t-3xl bg-white p-2 md:static md:p-0">
                                 <ArchiveZone />
                             </div>
                         </Sidebar>

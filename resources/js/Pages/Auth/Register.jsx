@@ -28,7 +28,7 @@ export default function Register() {
             bottomText2="Login here"
             title="Register"
         >
-            <Head title="Register" />
+            <Head title="Register - Tudus" />
 
             <form onSubmit={submit}>
                 <div>

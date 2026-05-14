@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
             bottomText2="Create an account"
             title="Login"
         >
-            <Head title="Log in" />
+            <Head title="Log in - Tudus" />
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">

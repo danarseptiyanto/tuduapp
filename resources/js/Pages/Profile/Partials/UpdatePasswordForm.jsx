@@ -82,7 +82,7 @@ export default function UpdatePasswordForm({ className = "" }) {
                     />
                 </div>
 
-                <div className="flex justify-between gap-4">
+                <div className="flex w-full flex-col justify-between gap-4 md:flex-row">
                     <div className="w-full">
                         <InputLabel htmlFor="password" value="New Password" />
 

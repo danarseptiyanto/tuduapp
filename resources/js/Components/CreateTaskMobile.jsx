@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 export default function TaskHeader({ onAddTask, isCreating }) {
     return (
-        <div className="fixed right-8 bottom-24 z-20 flex flex-col items-end justify-between gap-2 md:hidden">
+        <div className="fixed right-8 bottom-24 z-30 flex flex-col items-end justify-between gap-2 md:hidden">
             <Menu>
                 <MenuButton className="flex aspect-square h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#F9C974] p-3 text-sm font-medium transition-all hover:bg-amber-400">
                     <svg
