@@ -1,7 +1,9 @@
 import { router, Link } from "@inertiajs/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { usePWAInstall } from "@/Hooks/usePWAInstall";
 
 export default function TaskHeader({ onAddTask, isCreating }) {
+    const { canInstall, isInstalled, install } = usePWAInstall();
     return (
         <div className="fixed right-8 bottom-24 z-30 flex flex-col items-end justify-between gap-2 md:hidden">
             <Menu>
@@ -27,6 +29,16 @@ export default function TaskHeader({ onAddTask, isCreating }) {
                     anchor="bottom end"
                     className="z-40 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none"
                 >
+                    {canInstall && !isInstalled && (
+                        <MenuItem>
+                            <button
+                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                onClick={install}
+                            >
+                                Install App
+                            </button>
+                        </MenuItem>
+                    )}
                     <MenuItem>
                         <Link
                             className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
