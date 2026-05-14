@@ -61,10 +61,8 @@ export default function EditTaskModal({ task, onClose, onDelete }) {
                 <input
                     type="datetime-local"
                     value={form.data.deadline}
-                    onChange={(e) =>
-                        form.setData("deadline", e.target.value)
-                    }
-                    className="text-heading block h-8 rounded-lg border border-gray-300 bg-white px-3 pb-2 text-sm"
+                    onChange={(e) => form.setData("deadline", e.target.value)}
+                    className="text-heading block h-8 w-full rounded-lg border border-gray-300 bg-white px-3 pb-2 text-sm"
                 />
                 <label
                     htmlFor="deadline"

@@ -13,12 +13,11 @@ const colorMap = {
     green: "bg-green-300",
 };
 
-export default function Sidebar({ archivedTasks = [], onUnarchive }) {
+export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
     return (
-        <div className="hidden h-dvh w-[396px] bg-white p-6 md:block">
-            {/* ARCHIVE DROP ZONE */}
-            <ArchiveZone />
-            <div>
+        <div className="min-h-dvh w-0 bg-white p-0 md:w-[396px] md:p-6">
+            {children}
+            <div className="hidden md:block">
                 <p className="pt-5 pb-4 font-medium">Last 5 task done</p>
                 <div>
                     {archivedTasks.length === 0 ? (

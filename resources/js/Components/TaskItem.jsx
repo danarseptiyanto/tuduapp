@@ -20,6 +20,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         attributes,
         listeners,
         setNodeRef,
+        setActivatorNodeRef,
         transform,
         transition,
         isDragging,
@@ -82,11 +83,32 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         <div
             ref={setNodeRef}
             style={style}
-            {...attributes}
-            {...listeners}
-            className={`aspect-square cursor-grab rounded-[18px] select-none ${bgColor}`}
+            className={`relative aspect-square rounded-[18px] select-none ${bgColor}`}
         >
-            <div className="flex h-full touch-none flex-col justify-between">
+            {/* Drag handle: visible grip icon on mobile, invisible full-card overlay on desktop */}
+            <div
+                ref={setActivatorNodeRef}
+                {...attributes}
+                {...listeners}
+                className="absolute top-2 right-2 z-10 flex h-8 w-8 cursor-grab touch-none items-center justify-center rounded-full bg-none active:cursor-grabbing md:inset-0 md:h-full md:w-full md:rounded-[18px] md:bg-transparent"
+                aria-label="Drag to reorder"
+            >
+                {/* Grip icon — only visible on mobile */}
+                <svg
+                    className="h-4 w-4 text-black/20 md:hidden"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="5.5" cy="3.5" r="1.5" />
+                    <circle cx="10.5" cy="3.5" r="1.5" />
+                    <circle cx="5.5" cy="8" r="1.5" />
+                    <circle cx="10.5" cy="8" r="1.5" />
+                    <circle cx="5.5" cy="12.5" r="1.5" />
+                    <circle cx="10.5" cy="12.5" r="1.5" />
+                </svg>
+            </div>
+            <div className="flex h-full flex-col justify-between">
                 <div className="flex-1 px-4 pt-4 md:px-6 md:pt-6">
                     <p className="line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
                         {task.description}
@@ -99,11 +121,10 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                     <button
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={() => onEdit(task)}
-                        className="flex aspect-square w-9 cursor-pointer items-center justify-center rounded-full bg-black"
+                        className="flex aspect-square h-min w-7 cursor-pointer items-center justify-center rounded-full bg-black md:w-9"
                     >
                         <svg
-                            width="15"
-                            height="15"
+                            className="h-3 w-3 md:h-3.5 md:w-3.5"
                             viewBox="0 0 15 15"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"

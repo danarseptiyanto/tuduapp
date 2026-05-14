@@ -7,12 +7,13 @@ import {
 import {
     DndContext,
     closestCenter,
+    pointerWithin,
     useSensor,
     useSensors,
     PointerSensor,
     TouchSensor,
 } from "@dnd-kit/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import TaskItem from "@/Components/TaskItem";
 import TuduLogo from "@/Components/TuduLogo";
 import TaskHeader from "@/Components/TaskHeader";
@@ -33,11 +34,23 @@ export default function Index({
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                delay: 250, // 250ms press delay
-                tolerance: 5, // Drag cancels if they move more than 5px during the delay
+                distance: 5, // Small movement threshold to distinguish click vs drag
             },
         }),
     );
+
+    // Custom collision detection: archive zone takes priority when the pointer
+    // is physically over it, otherwise fall back to closestCenter for sorting.
+    const collisionDetection = useCallback((args) => {
+        const archiveCollisions = pointerWithin({
+            ...args,
+            droppableContainers: args.droppableContainers.filter(
+                (c) => c.id === "archive",
+            ),
+        });
+        if (archiveCollisions.length > 0) return archiveCollisions;
+        return closestCenter(args);
+    }, []);
 
     const generalCategory = categories.find((c) => c.name === "General");
 
@@ -105,7 +118,7 @@ export default function Index({
     return (
         <LoginLayout>
             <DndContext
-                collisionDetection={closestCenter}
+                collisionDetection={collisionDetection}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
                 sensors={sensors}
@@ -114,7 +127,7 @@ export default function Index({
                     <div className="mx-auto flex max-w-[1540px] justify-between">
                         <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
                             <TuduLogo />
-                            <div className="mx-auto space-y-8 py-9">
+                            <div className="mx-auto space-y-8 py-6 md:py-9">
                                 {/* HEADER */}
                                 <TaskHeader
                                     onAddTask={() => setShowCreate(true)}
@@ -189,11 +202,12 @@ export default function Index({
                         <Sidebar
                             archivedTasks={archivedTasks}
                             onUnarchive={unarchiveTask}
-                        />
+                        >
+                            <div className="fixed bottom-0 left-0 z-20 block w-full rounded-t-3xl bg-white p-2 md:static">
+                                <ArchiveZone />
+                            </div>
+                        </Sidebar>
                     </div>
-                </div>
-                <div className="fixed bottom-0 left-0 block w-full rounded-3xl bg-white p-2 md:hidden">
-                    <ArchiveZone />
                 </div>
             </DndContext>
         </LoginLayout>

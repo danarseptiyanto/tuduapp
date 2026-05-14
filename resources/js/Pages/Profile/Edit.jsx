@@ -10,7 +10,7 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <div className="bg-[#F8F6F5]">
             <div className="mx-auto min-h-screen max-w-[1540px] justify-between">
-                <div className="mx-14 flex items-center justify-between pt-7">
+                <div className="mx-6 flex items-center justify-between pt-7 md:mx-14">
                     <Link href={route("tasks.index")}>
                         <TuduLogo />
                     </Link>
@@ -20,11 +20,11 @@ export default function Edit({ mustVerifyEmail, status }) {
                         Back to Tasks
                     </PrimaryButton>
                 </div>
-                <div className="mx-14 py-8">
-                    <div className="mx-auto space-y-6">
-                        <div className="flex justify-between gap-6">
+                <div className="mx-6 py-8 md:mx-14">
+                    <div className="mx-auto space-y-4 md:space-y-6">
+                        <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-6">
                             <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                                <p className="my-1.5 text-center font-semibold text-gray-700">
+                                <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
                                     Profile Information
                                 </p>
                                 <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
@@ -36,7 +36,7 @@ export default function Edit({ mustVerifyEmail, status }) {
                                 </div>
                             </div>
                             <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                                <p className="my-1.5 text-center font-semibold text-gray-700">
+                                <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
                                     Update Password
                                 </p>
                                 <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
@@ -45,7 +45,7 @@ export default function Edit({ mustVerifyEmail, status }) {
                             </div>
                         </div>
                         <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                            <p className="my-1.5 text-center font-semibold text-gray-700">
+                            <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
                                 Delete Account
                             </p>
                             <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">

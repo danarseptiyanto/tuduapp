@@ -5,7 +5,7 @@ export default function ArchiveZone() {
     return (
         <div
             ref={setNodeRef}
-            className={`flex flex-row items-center justify-center gap-3 rounded-xl border border-dashed border-gray-300 px-6 py-6 md:flex-col md:py-16 ${
+            className={`flex flex-row items-center justify-center gap-3 rounded-xl border border-dashed border-gray-300 px-6 py-8 md:flex-col md:py-16 ${
                 isOver
                     ? "border-green-600 bg-green-100 text-black"
                     : "text-gray-600"

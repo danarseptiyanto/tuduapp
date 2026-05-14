@@ -3,9 +3,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 export default function TaskHeader({ onAddTask, isCreating }) {
     return (
-        <div className="fixed right-6 bottom-20 flex flex-col items-end justify-between gap-2 md:hidden">
+        <div className="fixed right-8 bottom-24 z-20 flex flex-col items-end justify-between gap-2 md:hidden">
             <Menu>
-                <MenuButton className="flex aspect-square h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-300 p-3 text-sm font-medium transition-all hover:bg-gray-400">
+                <MenuButton className="flex aspect-square h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#F9C974] p-3 text-sm font-medium transition-all hover:bg-amber-400">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -25,7 +25,7 @@ export default function TaskHeader({ onAddTask, isCreating }) {
                 </MenuButton>
                 <MenuItems
                     anchor="bottom end"
-                    className="z-10 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none"
+                    className="z-40 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none"
                 >
                     <MenuItem>
                         <Link
@@ -56,8 +56,10 @@ export default function TaskHeader({ onAddTask, isCreating }) {
             <button
                 onClick={onAddTask}
                 disabled={isCreating}
-                className={`flex h-14 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-7 text-sm font-medium transition-all hover:bg-gray-400 ${
-                    isCreating ? "cursor-not-allowed bg-gray-400" : "bg-black"
+                className={`flex h-14 cursor-pointer items-center gap-2 rounded-full px-7 text-sm font-medium transition-all hover:bg-amber-400 ${
+                    isCreating
+                        ? "cursor-not-allowed bg-gray-400"
+                        : "bg-[#F9C974]"
                 }`}
             >
                 {isCreating ? (

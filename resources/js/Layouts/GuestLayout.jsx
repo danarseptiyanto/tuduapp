@@ -10,7 +10,7 @@ export default function GuestLayout({
 }) {
     return (
         <div className="flex min-h-screen flex-col items-center gap-5 bg-[#F8F6F5] pt-6 sm:justify-center sm:pt-0">
-            <div className="mb-5 flex items-center justify-center gap-2">
+            <div className="mb-2 flex items-center justify-center gap-2">
                 <div className="flex h-[48px] w-[48px] items-center justify-center rounded-xl bg-[#F9C974]">
                     <svg
                         width="22"
@@ -55,12 +55,14 @@ export default function GuestLayout({
                 </div>
                 <p className="text-xl font-bold text-gray-800">Tudus</p>
             </div>
-            <div className="w-full max-w-[490px] rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                <p className="my-1.5 text-center font-semibold text-gray-700">
-                    {title}
-                </p>
-                <div className="w-full overflow-hidden bg-white px-6 pt-10 pb-6 sm:rounded-2xl">
-                    {children}
+            <div className="w-full max-w-[490px] px-2">
+                <div className="w-full max-w-[490px] rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
+                    <p className="my-1.5 text-center font-semibold text-gray-700">
+                        {title}
+                    </p>
+                    <div className="w-full overflow-hidden rounded-2xl bg-white px-6 pt-10 pb-6">
+                        {children}
+                    </div>
                 </div>
             </div>
             <Link
