@@ -21,11 +21,11 @@ export default defineConfig({
             },
             // Manifest — controls install prompt & app shell appearance
             manifest: {
-                name: "My App",
-                short_name: "MyApp",
-                description: "My Laravel Inertia PWA",
-                theme_color: "#ffffff",
-                background_color: "#ffffff",
+                name: "Tudus",
+                short_name: "Tudus",
+                description: "Tudus by danars.net",
+                theme_color: "#F8F6F5",
+                background_color: "#F8F6F5",
                 display: "standalone",
                 orientation: "portrait",
                 scope: "/",
