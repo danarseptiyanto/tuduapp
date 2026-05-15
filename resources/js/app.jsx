@@ -6,27 +6,6 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
 import { registerSW } from "virtual:pwa-register";
 import { toast } from "sonner";
-import { StatusBar, Style } from "@capacitor/status-bar";
-
-async function setupNativeUI() {
-    try {
-        await StatusBar.setStyle({
-            style: Style.Dark,
-        });
-
-        await StatusBar.setBackgroundColor({
-            color: "#ffffff",
-        });
-
-        await StatusBar.setOverlaysWebView({
-            overlay: false,
-        });
-    } catch (e) {
-        // ignore on web
-    }
-}
-
-setupNativeUI();
 
 createInertiaApp({
     title: (title) => `${title}`,
