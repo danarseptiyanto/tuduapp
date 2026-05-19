@@ -124,7 +124,7 @@ export default function Index({
                 sensors={sensors}
             >
                 <Head title="Tasks - Tudus" />
-                <div className="bg-[#F8F6F5]">
+                <div className="bg-[#F8F6F5] transition-colors dark:bg-gray-900">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
                         <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
                             <TuduLogo />

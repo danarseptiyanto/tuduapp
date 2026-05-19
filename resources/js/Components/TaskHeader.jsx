@@ -1,8 +1,10 @@
 import { router, Link } from "@inertiajs/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { usePWAInstall } from "@/Hooks/usePWAInstall";
+import { useDarkMode } from "@/Hooks/useDarkMode";
 export default function TaskHeader({ onAddTask, isCreating, userName }) {
     const { canInstall, isInstalled, install } = usePWAInstall();
+    const { isDark, toggle } = useDarkMode();
     return (
         <div className="hidden items-center justify-between md:flex">
             <h1 className="text-3xl">
@@ -79,6 +81,15 @@ export default function TaskHeader({ onAddTask, isCreating, userName }) {
                                 </button>
                             </MenuItem>
                         )}
+
+                        <MenuItem>
+                            <button
+                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                onClick={toggle}
+                            >
+                                {isDark ? "Light Mode" : "Dark Mode"}
+                            </button>
+                        </MenuItem>
 
                         <MenuItem>
                             <Link
