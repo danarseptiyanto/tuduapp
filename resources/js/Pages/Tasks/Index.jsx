@@ -16,6 +16,7 @@ import {
 import { useState, useEffect, useCallback } from "react";
 import TaskItem from "@/Components/TaskItem";
 import TuduLogo from "@/Components/TuduLogo";
+import ThemeToggle from "@/Components/ThemeToggle";
 import TaskHeader from "@/Components/TaskHeader";
 import CreateTaskMobile from "@/Components/CreateTaskMobile";
 import CreateTaskModal from "@/Components/CreateTaskModal";
@@ -127,7 +128,10 @@ export default function Index({
                 <div className="bg-[#F8F6F5] transition-colors dark:bg-gray-900">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
                         <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
-                            <TuduLogo />
+                            <div className="flex items-center justify-between md:block">
+                                <TuduLogo />
+                                <ThemeToggle className="md:hidden" />
+                            </div>
                             <div className="mx-auto space-y-8 py-6 md:py-9">
                                 {/* HEADER */}
                                 <TaskHeader
