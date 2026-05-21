@@ -160,6 +160,14 @@ export default function Index({
                                         anchor="bottom end"
                                         className="z-40 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none"
                                     >
+                                        <MenuItem>
+                                            <Link
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                href="/tasks/categories"
+                                            >
+                                                Manage Categories
+                                            </Link>
+                                        </MenuItem>
                                         {canInstall && !isInstalled && (
                                             <MenuItem>
                                                 <button
