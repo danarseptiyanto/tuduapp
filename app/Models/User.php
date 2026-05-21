@@ -6,22 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Category;
 
 
 class User extends Authenticatable
 {
-
-    protected static function booted()
-    {
-        static::created(function ($user) {
-            Category::create([
-                'user_id' => $user->id,
-                'name' => 'General',
-            ]);
-        });
-    }
-
     public function categories()
     {
         return $this->hasMany(Category::class);

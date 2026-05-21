@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/tasks/{task}/archive', [TaskController::class, 'archive']);
     Route::post('/tasks/{task}/unarchive', [TaskController::class, 'unarchive']);
     Route::post('/tasks/reorder', [TaskController::class, 'reorder']);
+
+    Route::get('/tasks/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/tasks/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::patch('/tasks/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/tasks/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 Route::get('/manifest.webmanifest', function () {
     $path = public_path('build/manifest.webmanifest');

@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
 
+        $query = Task::where('user_id', $user->id)
+            ->where('archived', false)
+            ->orderBy('order');
+
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category);
+            });
+        }
+
         return Inertia::render('Tasks/Index', [
-            'tasks' => Task::where('user_id', $user->id)
-                ->where('archived', false)
-                ->orderBy('order')
-                ->get(),
+            'tasks' => $query->with('category')->get(),
             'categories' => $user->categories,
             'archivedTasks' => Task::where('user_id', auth()->id())
                 ->where('archived', true)
@@ -25,6 +31,7 @@ class TaskController extends Controller
                 ->limit(5)
                 ->get(),
             'user' => $user,
+            'filters' => $request->only('category'),
         ]);
     }
 
@@ -38,14 +45,6 @@ class TaskController extends Controller
 
         $userId = auth()->id();
 
-        // Default "General" category
-        $categoryId = $request->category_id;
-        if (! $categoryId) {
-            $categoryId = Category::where('user_id', $userId)
-                ->where('name', 'General')
-                ->value('id');
-        }
-
         // 🎨 Random color
         $colors = ['orange', 'lime', 'sky', 'violet', 'fuchsia', 'pink', 'zinc', 'purple', 'emerald', 'green'];
         $randomColor = $colors[array_rand($colors)];
@@ -58,12 +57,12 @@ class TaskController extends Controller
         // Create new task at top
         Task::create([
             'user_id' => $userId,
-            'category_id' => $categoryId,
+            'category_id' => $request->category_id,
             'description' => $request->description,
             'deadline' => $request->deadline,
             'archived' => false,
             'order' => 0,
-            'color' => $randomColor,   // 👈 persisted
+            'color' => $randomColor,
         ]);
 
         return redirect()->back()->with('success', 'Task created successfully!');
@@ -79,6 +78,7 @@ class TaskController extends Controller
             $request->validate([
                 'description' => 'nullable|string',
                 'deadline' => 'nullable|date',
+                'category_id' => 'nullable|exists:categories,id',
             ])
         );
 

@@ -1,10 +1,12 @@
-import { useForm } from "@inertiajs/react";
+import { useForm, router } from "@inertiajs/react";
 import TaskModal from "./TaskModal";
+import CategorySelect from "./CategorySelect";
 
-export default function EditTaskModal({ task, onClose, onDelete }) {
+export default function EditTaskModal({ task, onClose, onDelete, categories = [] }) {
     const form = useForm({
         description: task.description || "",
         deadline: task.deadline ? task.deadline.substring(0, 16) : "",
+        category_id: task.category_id || null,
     });
 
     function handleSubmit(e) {
@@ -58,6 +60,11 @@ export default function EditTaskModal({ task, onClose, onDelete }) {
                 </div>
             </form>
             <div className="absolute bottom-20 flex w-full flex-col-reverse gap-1.5 pr-[44px] pl-[11px]">
+                <CategorySelect
+                    categories={categories}
+                    value={form.data.category_id}
+                    onChange={(val) => form.setData("category_id", val)}
+                />
                 <input
                     type="datetime-local"
                     value={form.data.deadline}

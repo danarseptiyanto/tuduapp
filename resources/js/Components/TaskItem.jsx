@@ -109,10 +109,17 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                 </svg>
             </div>
             <div className="flex h-full flex-col justify-between">
-                <div className="flex-1 px-4 pt-5.5 md:px-6 md:pt-6">
-                    <p className="whitespace-pre-wrap line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
+                <div className="h-full justify-between px-4 pt-5.5 md:px-6 md:pt-6">
+                    <p className="line-clamp-4 text-[13px] leading-snug whitespace-pre-wrap md:line-clamp-none md:text-[14px]">
                         {task.description}
                     </p>
+                    {task.category && (
+                        <div className="mt-2 w-fit rounded-md bg-black/5 px-1.5 py-1">
+                            <p className="text-[11px] font-light md:text-xs">
+                                {task.category.name}
+                            </p>
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-between gap-2 pr-3.5 pb-3.5 pl-4 md:pl-6">
                     <p className="mt-1 text-[11px] font-light md:text-xs">
