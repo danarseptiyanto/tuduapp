@@ -78,7 +78,7 @@ export default function TaskHeader({ onAddTask, isCreating }) {
             <button
                 onClick={onAddTask}
                 disabled={isCreating}
-                className={`flex h-14 cursor-pointer items-center gap-2 rounded-full px-7 text-sm font-medium transition-all hover:bg-amber-400 ${
+                className={`flex h-14 cursor-pointer items-center gap-2 rounded-full px-7 text-sm font-medium shadow-lg shadow-black transition-all hover:bg-amber-400 ${
                     isCreating
                         ? "cursor-not-allowed bg-gray-400"
                         : "bg-[#F9C974]"
@@ -109,7 +109,7 @@ export default function TaskHeader({ onAddTask, isCreating }) {
                         Creating...
                     </>
                 ) : (
-                    "Add Task"
+                    "Add Taskx"
                 )}
             </button>
         </div>

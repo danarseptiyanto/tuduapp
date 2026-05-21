@@ -113,6 +113,9 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                     <p className="whitespace-pre-wrap line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
                         {task.description}
                     </p>
+                    <p className="mt-2 text-[11px] font-medium text-black/50 md:text-xs">
+                        {task.category ? task.category.name : "Uncategorized"}
+                    </p>
                 </div>
                 <div className="flex justify-between gap-2 pr-3.5 pb-3.5 pl-4 md:pl-6">
                     <p className="mt-1 text-[11px] font-light md:text-xs">

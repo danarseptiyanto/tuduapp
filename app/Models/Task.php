@@ -20,4 +20,9 @@ class Task extends Model
         'archived' => 'boolean',
         'deadline' => 'datetime',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

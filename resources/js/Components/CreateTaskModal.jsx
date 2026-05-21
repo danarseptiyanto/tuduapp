@@ -1,14 +1,15 @@
 import { useForm, router } from "@inertiajs/react";
 import { useState } from "react";
 import TaskModal from "./TaskModal";
+import CategorySelect from "./CategorySelect";
 
-export default function CreateTaskModal({ onClose, defaultCategoryId }) {
+export default function CreateTaskModal({ onClose, defaultCategoryId, categories = [] }) {
     const [isCreating, setIsCreating] = useState(false);
 
     const form = useForm({
         description: "",
         deadline: "",
-        category_id: defaultCategoryId || "",
+        category_id: defaultCategoryId || null,
     });
 
     function handleSubmit(e) {
@@ -67,6 +68,11 @@ export default function CreateTaskModal({ onClose, defaultCategoryId }) {
                 </div>
             </form>
             <div className="absolute bottom-20 flex w-full flex-col-reverse gap-1.5 pr-[44px] pl-[11px]">
+                <CategorySelect
+                    categories={categories}
+                    value={form.data.category_id}
+                    onChange={(val) => form.setData("category_id", val)}
+                />
                 <input
                     type="datetime-local"
                     value={form.data.deadline}

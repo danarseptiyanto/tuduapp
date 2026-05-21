@@ -10,7 +10,7 @@ export default function GuestLayout({
     bottomText2,
 }) {
     return (
-        <div className="flex min-h-screen flex-col items-center gap-5 bg-[#F8F6F5] dark:bg-gray-900 pt-6 sm:justify-center sm:pt-0">
+        <div className="flex min-h-dvh flex-col items-center gap-5 bg-[#F8F6F5] pt-6 sm:justify-center sm:pt-0 dark:bg-gray-900">
             <div className="mb-2 flex items-center justify-center gap-2">
                 <div className="flex h-[48px] w-[48px] items-center justify-center rounded-xl bg-[#F9C974]">
                     <svg
@@ -24,7 +24,9 @@ export default function GuestLayout({
                         <path d="M114.424 42.1948C121.729 42.1948 127.652 48.1184 127.652 55.4232C127.652 62.728 121.729 68.6516 114.424 68.6516H13.2284C5.92353 68.6516 0 62.728 0 55.4232C0 48.1184 5.92353 42.1948 13.2284 42.1948H114.424Z" />
                     </svg>
                 </div>
-                <p className="text-xl font-semibold text-gray-800 dark:text-gray-200">tudus</p>
+                <p className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                    tudus
+                </p>
                 <ThemeToggle />
             </div>
             <div className="w-full max-w-[490px] px-2">

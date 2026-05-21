@@ -9,7 +9,7 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <div className="bg-[#F8F6F5]">
             <Head title="Profile - Tudus" />
-            <div className="mx-auto min-h-screen max-w-[1540px] justify-between">
+            <div className="mx-auto min-h-dvh max-w-[1540px] justify-between">
                 <div className="mx-6 flex items-center justify-between pt-7 md:mx-14">
                     <Link href={route("tasks.index")}>
                         <TuduLogo />
