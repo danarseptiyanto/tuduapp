@@ -37,7 +37,7 @@ export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
                                             key={task.id}
                                             className={`min-h-[65px] rounded-xl px-5 py-4 text-sm opacity-80 ${bgColor}`}
                                         >
-                                            <p className="line-clamp-2 text-[13px] leading-snug">
+                                            <p className="whitespace-pre-wrap line-clamp-2 text-[13px] leading-snug">
                                                 {task.description}
                                             </p>
                                             <button

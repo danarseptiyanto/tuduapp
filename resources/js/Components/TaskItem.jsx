@@ -90,12 +90,12 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                 ref={setActivatorNodeRef}
                 {...attributes}
                 {...listeners}
-                className="absolute top-2 right-2 z-10 flex h-8 w-8 cursor-grab touch-none items-center justify-center rounded-full bg-none active:cursor-grabbing md:inset-0 md:h-full md:w-full md:rounded-[18px] md:bg-transparent"
+                className="absolute top-0 right-0 z-10 flex h-6.5 w-6.5 cursor-grab touch-none items-center justify-center rounded-tr-[18px] rounded-bl-2xl bg-[#F8F6F5]/30 bg-none active:cursor-grabbing md:inset-0 md:h-full md:w-full md:rounded-[18px] md:bg-transparent"
                 aria-label="Drag to reorder"
             >
                 {/* Grip icon — only visible on mobile */}
                 <svg
-                    className="h-4 w-4 text-black/20 md:hidden"
+                    className="h-3 w-3 text-black/20 md:hidden"
                     viewBox="0 0 16 16"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
@@ -109,8 +109,8 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                 </svg>
             </div>
             <div className="flex h-full flex-col justify-between">
-                <div className="flex-1 px-4 pt-4 md:px-6 md:pt-6">
-                    <p className="line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
+                <div className="flex-1 px-4 pt-5.5 md:px-6 md:pt-6">
+                    <p className="whitespace-pre-wrap line-clamp-4 text-[13px] leading-snug md:line-clamp-none md:text-[14px]">
                         {task.description}
                     </p>
                 </div>

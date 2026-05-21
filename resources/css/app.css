@@ -4,6 +4,8 @@
 
 @plugin "@tailwindcss/forms";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
 
@@ -28,5 +30,15 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentcolor);
+    }
+
+    html {
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    html *,
+    html ::after,
+    html ::before {
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
     }
 }
