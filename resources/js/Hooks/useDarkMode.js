@@ -12,6 +12,11 @@ export function useDarkMode() {
         } else {
             document.documentElement.classList.remove("dark");
         }
+
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute("content", isDark ? "#1f2937" : "#f9fafb");
+        }
     }, [isDark]);
 
     const toggle = () => setIsDark((prev) => !prev);
