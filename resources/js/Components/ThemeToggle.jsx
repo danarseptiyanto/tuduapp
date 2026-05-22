@@ -25,6 +25,10 @@ export default function ThemeToggle({ className = "" }) {
                 document.documentElement.classList.remove("dark");
                 localStorage.theme = "light";
             }
+            const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeColorMeta) {
+                themeColorMeta.setAttribute("content", next ? "#1f2937" : "#f9fafb");
+            }
             return next;
         });
         setIsSpinning(true);
