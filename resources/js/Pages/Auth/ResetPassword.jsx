@@ -42,7 +42,7 @@ export default function ResetPassword({ token, email }) {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-3 md:mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -59,7 +59,7 @@ export default function ResetPassword({ token, email }) {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-3 md:mt-4">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Confirm Password"

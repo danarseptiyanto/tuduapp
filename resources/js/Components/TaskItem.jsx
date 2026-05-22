@@ -128,7 +128,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                     <button
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={() => onEdit(task)}
-                        className="relative z-20 flex aspect-square h-min w-7 cursor-pointer items-center justify-center rounded-full bg-black md:w-9"
+                        className="relative z-10 flex aspect-square h-min w-7 cursor-pointer items-center justify-center rounded-full bg-black md:w-9"
                     >
                         <svg
                             className="h-3 w-3 md:h-3.5 md:w-3.5"

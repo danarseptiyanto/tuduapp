@@ -265,7 +265,7 @@ export default function Index({
                                             </button>
                                         </div>
                                     )}
-                                    <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-6">
+                                    <div className="grid grid-cols-2 gap-2 pb-24 md:grid-cols-3 md:gap-3 md:pb-5 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 xl:gap-6">
                                         {items.map((task) => (
                                             <TaskItem
                                                 key={task.id}

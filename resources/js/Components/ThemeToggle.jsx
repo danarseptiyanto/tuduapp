@@ -25,9 +25,14 @@ export default function ThemeToggle({ className = "" }) {
                 document.documentElement.classList.remove("dark");
                 localStorage.theme = "light";
             }
-            const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            const themeColorMeta = document.querySelector(
+                'meta[name="theme-color"]',
+            );
             if (themeColorMeta) {
-                themeColorMeta.setAttribute("content", next ? "#1f2937" : "#f9fafb");
+                themeColorMeta.setAttribute(
+                    "content",
+                    next ? "#1f2937" : "#f9fafb",
+                );
             }
             return next;
         });
@@ -45,7 +50,7 @@ export default function ThemeToggle({ className = "" }) {
     return (
         <button
             onClick={toggle}
-            className={`flex h-[48px] w-[48px] items-center justify-center rounded-xl text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 ${className}`}
+            className={`ver:bg-gray-700 flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-xl ${className}`}
         >
             {isDark ? (
                 <svg

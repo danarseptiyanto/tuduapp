@@ -54,7 +54,7 @@ export default function Login({ status, canResetPassword }) {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-3 md:mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -79,17 +79,17 @@ export default function Login({ status, canResetPassword }) {
                                 setData("remember", e.target.checked)
                             }
                         />
-                        <span className="ms-2 text-sm text-gray-600">
+                        <span className="ms-2 text-xs text-gray-600 md:text-sm">
                             Remember me
                         </span>
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end gap-4">
+                <div className="mt-4 flex items-center justify-end gap-3">
                     {canResetPassword && (
                         <Link
                             href={route("password.request")}
-                            className="rounded-md text-sm text-gray-600 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
+                            className="rounded-md text-xs text-gray-600 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden md:text-sm"
                         >
                             Forgot your password?
                         </Link>

@@ -1,6 +1,6 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
 import ThemeToggle from "@/Components/ThemeToggle";
 import { Link } from "@inertiajs/react";
+import TuduLogo from "@/Components/TuduLogo";
 
 export default function GuestLayout({
     title,
@@ -10,43 +10,35 @@ export default function GuestLayout({
     bottomText2,
 }) {
     return (
-        <div className="flex min-h-dvh flex-col items-center gap-5 bg-[#F8F6F5] pt-6 sm:justify-center sm:pt-0 dark:bg-gray-900">
-            <div className="mb-2 flex items-center justify-center gap-2">
-                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-xl bg-[#F9C974]">
-                    <svg
-                        className="h-6 w-6 fill-gray-800"
-                        viewBox="0 0 176 178"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M149.273 107.52C149.273 100.216 155.197 94.292 162.502 94.292C169.806 94.292 175.73 100.216 175.73 107.52C175.73 126.821 167.905 144.296 155.255 156.947C142.604 169.597 125.13 177.422 105.828 177.422C86.5267 177.422 69.0527 169.597 56.402 156.947C43.7513 144.296 35.9267 126.822 35.9267 107.52H35.979L35.8378 13.1761C35.8378 5.89952 41.7373 0 49.0139 0C56.2905 0 62.19 5.89952 62.19 13.1761L62.3312 107.52H62.3835C62.3835 119.519 67.2463 130.38 75.1076 138.241C82.9689 146.102 93.8302 150.965 105.828 150.965C117.827 150.965 128.688 146.102 136.549 138.241C144.41 130.38 149.273 119.519 149.273 107.52Z" />
-                        <path d="M73.9862 103.701C68.8211 98.5645 68.7971 90.213 73.9339 85.048C79.0708 79.8829 87.4222 79.8589 92.5873 84.9957L106.413 98.6902L150.034 54.1705C155.143 48.9772 163.494 48.9065 168.689 54.0151C173.883 59.1237 173.953 67.4751 168.845 72.6699L115.907 126.696C110.77 131.861 102.419 131.885 97.2538 126.749L73.9876 103.701H73.9862Z" />
-                        <path d="M114.424 42.1948C121.729 42.1948 127.652 48.1184 127.652 55.4232C127.652 62.728 121.729 68.6516 114.424 68.6516H13.2284C5.92353 68.6516 0 62.728 0 55.4232C0 48.1184 5.92353 42.1948 13.2284 42.1948H114.424Z" />
-                    </svg>
+        <div className="flex h-full min-h-dvh flex-col items-center justify-between bg-[#F8F6F5] dark:bg-gray-900">
+            <div className="mx-auto w-full max-w-[1540px] justify-between">
+                <div className="mx-6 flex items-center justify-between pt-[29px] md:mx-14 md:pt-7">
+                    <TuduLogo />
+                    <div className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-xl bg-[#F9C974] hover:bg-amber-400">
+                        <ThemeToggle />
+                    </div>
                 </div>
-                <p className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                    tudus
-                </p>
-                <ThemeToggle />
             </div>
-            <div className="w-full max-w-[490px] px-2">
+            <div className="w-full max-w-[490px] px-6 md:px-0">
                 <div className="w-full max-w-[490px] rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
                     <p className="my-1.5 text-center font-semibold text-gray-700">
                         {title}
                     </p>
-                    <div className="w-full overflow-hidden rounded-2xl bg-white px-6 pt-10 pb-6">
+                    <div className="w-full overflow-hidden rounded-2xl bg-white px-4 pt-6 pb-4 md:px-6 md:pt-10 md:pb-6">
                         {children}
                     </div>
                 </div>
+                <div className="mt-3 text-center">
+                    <Link
+                        href={bottomLink}
+                        className="text-[12.5px] text-gray-600 hover:text-gray-900 md:text-sm"
+                    >
+                        {bottomText1}
+                        <span className="text-black"> {bottomText2}</span>
+                    </Link>
+                </div>
             </div>
-            <Link
-                href={bottomLink}
-                className="text-sm text-gray-600 hover:text-gray-900"
-            >
-                {bottomText1}
-                <span className="text-black"> {bottomText2}</span>
-            </Link>
-            <div className="absolute bottom-5 flex items-center gap-1.5 text-[13px] text-gray-600">
+            <div className="flex items-center gap-1.5 pb-6 text-[13px] text-gray-600">
                 Project by
                 <a
                     className="flex aspect-square h-5.5 items-center justify-center rounded-sm bg-orange-500"
