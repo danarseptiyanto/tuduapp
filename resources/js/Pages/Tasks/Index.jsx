@@ -132,7 +132,7 @@ export default function Index({
                 sensors={sensors}
             >
                 <Head title="Tasks - Tudus" />
-                <div className="bg-[#F8F6F5] transition-colors dark:bg-gray-900">
+                <div className="bg-[#F8F6F5] transition-colors dark:bg-[#1F1F1F]">
                     <div className="mx-auto flex max-w-[1540px] justify-between">
                         <div className="mx-6 min-h-dvh w-[1025px] pt-7 md:mx-14">
                             <div className="flex items-center justify-between md:block">
@@ -149,7 +149,7 @@ export default function Index({
                                 <Menu>
                                     <MenuButton className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-xl bg-[#F9C974] md:hidden">
                                         <svg
-                                            className="h-4.5 w-4.5 fill-gray-800"
+                                            className="h-4.5 w-4.5 fill-gray-800 dark:fill-black"
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
                                         >
@@ -158,11 +158,11 @@ export default function Index({
                                     </MenuButton>
                                     <MenuItems
                                         anchor="bottom end"
-                                        className="z-40 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none"
+                                        className="z-40 mt-2 w-44 min-w-36 rounded-2xl border border-gray-200 bg-white p-2 shadow-lg outline-none dark:border-white/15 dark:bg-[#292929] dark:shadow-black/30"
                                     >
                                         <MenuItem>
                                             <Link
-                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
                                                 href="/tasks/categories"
                                             >
                                                 Manage Categories
@@ -171,7 +171,7 @@ export default function Index({
                                         {canInstall && !isInstalled && (
                                             <MenuItem>
                                                 <button
-                                                    className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                    className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
                                                     onClick={install}
                                                 >
                                                     Install App
@@ -180,7 +180,7 @@ export default function Index({
                                         )}
                                         <MenuItem>
                                             <button
-                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
                                                 onClick={toggle}
                                             >
                                                 {isDark
@@ -190,7 +190,7 @@ export default function Index({
                                         </MenuItem>
                                         <MenuItem>
                                             <Link
-                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
                                                 href="/profile"
                                             >
                                                 Profile
@@ -198,7 +198,7 @@ export default function Index({
                                         </MenuItem>
                                         <MenuItem>
                                             <Link
-                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900"
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
                                                 href="/profile"
                                             >
                                                 Change Password
@@ -206,7 +206,7 @@ export default function Index({
                                         </MenuItem>
                                         <MenuItem>
                                             <button
-                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-red-600 hover:bg-[#F9C974]/20 hover:text-red-700"
+                                                className="inline-flex w-full items-center rounded-lg p-2 text-sm text-red-600 hover:bg-[#F9C974]/20 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                                                 onClick={() =>
                                                     router.post(route("logout"))
                                                 }
@@ -246,7 +246,7 @@ export default function Index({
                                     strategy={rectSortingStrategy}
                                 >
                                     {items.length === 0 && (
-                                        <div className="flex h-[calc(100dvh-13rem)] w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#F9C974]/50 py-24 md:h-max">
+                                        <div className="flex h-[calc(100dvh-13rem)] w-full flex-col items-center justify-center rounded-xl border-none border-[#F9C974]/50 py-24 md:h-max md:border-2 md:border-dashed">
                                             <p className="text-5xl text-gray-500 md:text-9xl">
                                                 \(-_-)/
                                             </p>
@@ -304,7 +304,7 @@ export default function Index({
                             archivedTasks={archivedTasks}
                             onUnarchive={unarchiveTask}
                         >
-                            <div className="fixed bottom-0 left-0 z-20 block w-full rounded-t-3xl bg-white p-2 md:static md:p-0">
+                            <div className="fixed bottom-0 left-0 z-40 block w-full rounded-t-3xl bg-white p-2 md:static md:p-0 dark:bg-[#292929] dark:md:bg-[#161616]">
                                 <ArchiveZone />
                             </div>
                         </Sidebar>

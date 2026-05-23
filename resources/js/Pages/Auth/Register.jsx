@@ -119,15 +119,17 @@ export default function Register() {
             </form>
 
             <div className="mt-6 flex items-center justify-center">
-                <span className="w-full border-t border-gray-300"></span>
-                <span className="px-3 text-sm text-gray-500">or</span>
-                <span className="w-full border-t border-gray-300"></span>
+                <span className="w-full border-t border-gray-300 dark:border-white/15"></span>
+                <span className="px-3 text-sm text-gray-500 dark:text-[#d1cfc0]">
+                    or
+                </span>
+                <span className="w-full border-t border-gray-300 dark:border-white/15"></span>
             </div>
 
             <div className="mt-6">
                 <a
                     href={route("google.redirect")}
-                    className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50"
+                    className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-white/15 dark:bg-[#D1CFC0]/20 dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0] dark:hover:bg-[#D1CFC0]/30"
                 >
                     <svg className="h-5 w-5" viewBox="0 0 24 24">
                         <path

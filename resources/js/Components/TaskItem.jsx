@@ -83,19 +83,19 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         <div
             ref={setNodeRef}
             style={style}
-            className={`relative aspect-square rounded-[18px] select-none ${bgColor}`}
+            className={`relative aspect-square rounded-[18px] select-none dark:bg-[#161616] ${bgColor}`}
         >
             {/* Drag handle: visible grip icon on mobile, invisible full-card overlay on desktop */}
             <div
                 ref={setActivatorNodeRef}
                 {...attributes}
                 {...listeners}
-                className="absolute top-0 right-0 z-10 flex h-6.5 w-6.5 cursor-grab touch-none items-center justify-center rounded-tr-[18px] rounded-bl-2xl bg-[#F8F6F5]/30 bg-none active:cursor-grabbing md:inset-0 md:h-full md:w-full md:rounded-[18px] md:bg-transparent"
+                className="absolute top-0 right-0 flex h-6.5 w-6.5 cursor-grab touch-none items-center justify-center rounded-tr-[18px] rounded-bl-2xl bg-[#F8F6F5]/30 bg-none active:cursor-grabbing md:inset-0 md:h-full md:w-full md:rounded-[18px] md:bg-transparent dark:bg-white/10 md:dark:bg-transparent"
                 aria-label="Drag to reorder"
             >
                 {/* Grip icon — only visible on mobile */}
                 <svg
-                    className="h-3 w-3 text-black/20 md:hidden"
+                    className="h-3 w-3 text-black/20 md:hidden dark:text-white/50"
                     viewBox="0 0 16 16"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
@@ -109,26 +109,26 @@ export default function TaskItem({ task, onEdit, onDelete }) {
                 </svg>
             </div>
             <div className="flex h-full flex-col justify-between">
-                <div className="h-full justify-between px-4 pt-5.5 md:px-6 md:pt-6">
+                <div className="h-full justify-between px-4 pt-5.5 text-gray-800 md:px-6 md:pt-6 dark:text-white">
                     <p className="line-clamp-4 text-[13px] leading-snug whitespace-pre-wrap md:line-clamp-none md:text-[14px]">
                         {task.description}
                     </p>
                     {task.category && (
-                        <div className="mt-2 w-fit rounded-md bg-black/5 px-1.5 py-1">
+                        <div className="mt-2 w-fit rounded-md bg-black/5 px-1.5 py-1 dark:bg-white/5">
                             <p className="text-[11px] font-light md:text-xs">
                                 {task.category.name}
                             </p>
                         </div>
                     )}
                 </div>
-                <div className="flex justify-between gap-2 pr-3.5 pb-3.5 pl-4 md:pl-6">
+                <div className="flex justify-between gap-2 pr-3.5 pb-3.5 pl-4 text-gray-800 md:pl-6 dark:text-[#D1CFC0]">
                     <p className="mt-1 text-[11px] font-light md:text-xs">
                         {timeLeft}
                     </p>
                     <button
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={() => onEdit(task)}
-                        className="relative z-10 flex aspect-square h-min w-7 cursor-pointer items-center justify-center rounded-full bg-black md:w-9"
+                        className="relative flex aspect-square h-min w-7 cursor-pointer items-center justify-center rounded-full bg-black md:w-9"
                     >
                         <svg
                             className="h-3 w-3 md:h-3.5 md:w-3.5"

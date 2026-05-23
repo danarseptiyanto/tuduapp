@@ -109,7 +109,7 @@ export default function TaskHeader({ onAddTask, isCreating }) {
                         Creating...
                     </>
                 ) : (
-                    "Add Taskx"
+                    "Add Task"
                 )}
             </button>
         </div>
