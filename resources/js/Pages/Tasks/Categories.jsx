@@ -49,7 +49,7 @@ export default function Categories({ categories }) {
     return (
         <LoginLayout>
             <Head title="Categories - Tudus" />
-            <div className="bg-[#F8F6F5] transition-colors dark:bg-gray-900">
+            <div className="bg-[#F8F6F5] transition-colors dark:bg-[#1F1F1F]">
                 <div className="mx-auto flex max-w-[1540px] justify-between">
                     <div className="mx-auto min-h-dvh w-full max-w-[1540px] justify-between">
                         <div className="mx-6 flex items-center justify-between pt-7 md:mx-14">
@@ -85,7 +85,7 @@ export default function Categories({ categories }) {
                                             )
                                         }
                                         placeholder="Add new category"
-                                        className="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm"
+                                        className="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
                                         required
                                     />
                                     <button
@@ -103,7 +103,7 @@ export default function Categories({ categories }) {
                             <div className="space-y-3">
                                 {categories.length === 0 && (
                                     <div className="rounded-lg border-2 border-dashed border-[#F9C974]/50 p-4 py-10">
-                                        <p className="text-center text-sm text-gray-500">
+                                        <p className="text-center text-sm text-gray-500 dark:text-[#d1cfc0]">
                                             No categories yet. Create one above.
                                         </p>
                                     </div>
@@ -113,7 +113,7 @@ export default function Categories({ categories }) {
                                     {categories.map((cat) => (
                                         <div
                                             key={cat.id}
-                                            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4"
+                                            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-white/15 dark:bg-[#292929]"
                                         >
                                             {editingId === cat.id ? (
                                                 <form
@@ -133,7 +133,7 @@ export default function Categories({ categories }) {
                                                                 e.target.value,
                                                             )
                                                         }
-                                                        className="text-heading w-full flex-1 rounded-lg border border-gray-300 bg-white px-2.5 py-0.5 text-sm"
+                                                        className="text-heading w-full flex-1 rounded-lg border border-gray-300 bg-white px-2.5 py-0.5 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0]"
                                                         required
                                                         autoFocus
                                                     />
@@ -157,7 +157,7 @@ export default function Categories({ categories }) {
                                                         onClick={() =>
                                                             setEditingId(null)
                                                         }
-                                                        className="flex aspect-square h-[30px] cursor-pointer items-center justify-center rounded-full bg-gray-200 p-2 text-sm font-medium transition-all hover:bg-gray-300 md:h-7"
+                                                        className="flex aspect-square h-[30px] cursor-pointer items-center justify-center rounded-full bg-gray-200 p-2 text-sm font-medium transition-all hover:bg-gray-300 md:h-7 dark:bg-gray-600 dark:hover:bg-gray-500"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +170,7 @@ export default function Categories({ categories }) {
                                                 </form>
                                             ) : (
                                                 <>
-                                                    <span className="text-sm font-medium text-gray-900">
+                                                    <span className="text-sm font-medium text-gray-900 dark:text-[#D1CFC0]">
                                                         {cat.name}
                                                     </span>
                                                     <div className="flex gap-2">
@@ -178,7 +178,7 @@ export default function Categories({ categories }) {
                                                             onClick={() =>
                                                                 startEdit(cat)
                                                             }
-                                                            className="flex aspect-square h-[30px] cursor-pointer items-center justify-center rounded-full bg-gray-200 p-2 text-sm font-medium transition-all hover:bg-gray-300 md:h-7"
+                                                            className="flex aspect-square h-[30px] cursor-pointer items-center justify-center rounded-full bg-gray-200 p-2 text-sm font-medium transition-all hover:bg-gray-300 md:h-7 dark:bg-gray-600 dark:hover:bg-gray-500"
                                                         >
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"

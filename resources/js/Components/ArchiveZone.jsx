@@ -5,10 +5,10 @@ export default function ArchiveZone() {
     return (
         <div
             ref={setNodeRef}
-            className={`flex flex-row items-center justify-center gap-3 rounded-xl border border-dashed border-gray-300 px-6 py-8 md:flex-col md:py-16 ${
+            className={`flex flex-row items-center justify-center gap-3 rounded-[16px] border border-dashed border-gray-300 px-6 py-8 md:flex-col md:py-16 dark:border-white/15 ${
                 isOver
-                    ? "border-green-600 bg-green-100 text-black"
-                    : "text-gray-600"
+                    ? "border-green-600 bg-green-100 text-black dark:bg-green-200/20 dark:text-white"
+                    : "text-gray-600 dark:text-[#D1CFC0]"
             }`}
         >
             <svg

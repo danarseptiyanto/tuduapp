@@ -15,11 +15,13 @@ const colorMap = {
 
 export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
     return (
-        <div className="min-h-dvh w-0 bg-white p-0 md:w-[396px] md:p-6">
-            <div className="sticky top-6 z-40">
+        <div className="sticky top-0 h-dvh w-0 overflow-hidden bg-white p-0 md:w-[396px] md:p-6 dark:bg-[#161616]">
+            <div className="h-full">
                 {children}
                 <div className="hidden md:block">
-                    <p className="pt-5 pb-4 font-medium">Last 5 task done</p>
+                    <p className="pt-5 pb-4 text-gray-600 dark:text-[#D1CFC0]">
+                        Recently done tasks
+                    </p>
                     <div>
                         {archivedTasks.length === 0 ? (
                             <div className="flex w-full flex-col items-center justify-center rounded-xl border border-dashed border-[#F9C974]/50 py-7">
@@ -35,16 +37,16 @@ export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
                                     return (
                                         <div
                                             key={task.id}
-                                            className={`min-h-[65px] rounded-xl px-5 py-4 text-sm opacity-80 ${bgColor}`}
+                                            className={`min-h-[65px] rounded-xl px-5 py-4 text-sm opacity-80 dark:bg-[#1F1F1F] ${bgColor}`}
                                         >
-                                            <p className="whitespace-pre-wrap line-clamp-2 text-[13px] leading-snug">
+                                            <p className="line-clamp-2 text-[13px] leading-snug whitespace-pre-wrap text-black dark:text-white">
                                                 {task.description}
                                             </p>
                                             <button
                                                 onClick={() =>
                                                     onUnarchive(task.id)
                                                 }
-                                                className="mt-2 inline-flex cursor-pointer items-center gap-1 text-xs text-gray-600 hover:text-gray-800"
+                                                className="mt-2 inline-flex cursor-pointer items-center gap-1 text-xs text-gray-600 hover:text-gray-800 dark:text-[#D1CFC0]/50 dark:hover:text-white"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

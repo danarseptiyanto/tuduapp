@@ -10,7 +10,7 @@ export default function GuestLayout({
     bottomText2,
 }) {
     return (
-        <div className="flex h-full min-h-dvh flex-col items-center justify-between bg-[#F8F6F5] dark:bg-gray-900">
+        <div className="flex h-full min-h-dvh flex-col items-center justify-between bg-[#F8F6F5] dark:bg-[#1F1F1F]">
             <div className="mx-auto w-full max-w-[1540px] justify-between">
                 <div className="mx-6 flex items-center justify-between pt-[29px] md:mx-14 md:pt-7">
                     <TuduLogo />
@@ -20,25 +20,28 @@ export default function GuestLayout({
                 </div>
             </div>
             <div className="w-full max-w-[490px] px-6 md:px-0">
-                <div className="w-full max-w-[490px] rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                    <p className="my-1.5 text-center font-semibold text-gray-700">
+                <div className="w-full max-w-[490px] rounded-[20px] bg-black/5 p-1 backdrop-blur-md dark:bg-[#161616]">
+                    <p className="my-1.5 text-center font-semibold text-gray-700 dark:text-[#d1cfc0]">
                         {title}
                     </p>
-                    <div className="w-full overflow-hidden rounded-2xl bg-white px-4 pt-6 pb-4 md:px-6 md:pt-10 md:pb-6">
+                    <div className="w-full overflow-hidden rounded-2xl bg-white px-4 pt-6 pb-4 md:px-6 md:pt-10 md:pb-6 dark:bg-[#292929]">
                         {children}
                     </div>
                 </div>
                 <div className="mt-3 text-center">
                     <Link
                         href={bottomLink}
-                        className="text-[12.5px] text-gray-600 hover:text-gray-900 md:text-sm"
+                        className="text-[12.5px] text-gray-600 md:text-sm dark:text-white"
                     >
                         {bottomText1}
-                        <span className="text-black"> {bottomText2}</span>
+                        <span className="text-black dark:text-white/60">
+                            {" "}
+                            {bottomText2}
+                        </span>
                     </Link>
                 </div>
             </div>
-            <div className="flex items-center gap-1.5 pb-6 text-[13px] text-gray-600">
+            <div className="flex items-center gap-1.5 pb-6 text-[13px] text-gray-600 dark:text-[#d1cfc0]">
                 Project by
                 <a
                     className="flex aspect-square h-5.5 items-center justify-center rounded-sm bg-orange-500"

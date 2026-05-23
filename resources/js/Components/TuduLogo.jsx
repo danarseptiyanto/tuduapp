@@ -2,7 +2,7 @@ export default function TuduLogo() {
     return (
         <div className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-xl bg-[#F9C974]">
             <svg
-                className="h-4.5 w-4.5 fill-gray-800"
+                className="h-4.5 w-4.5 fill-gray-800 dark:fill-black"
                 viewBox="0 0 176 178"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

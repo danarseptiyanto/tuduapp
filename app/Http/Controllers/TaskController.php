@@ -28,7 +28,7 @@ class TaskController extends Controller
             'archivedTasks' => Task::where('user_id', auth()->id())
                 ->where('archived', true)
                 ->orderByDesc('updated_at')
-                ->limit(5)
+                ->limit(10)
                 ->get(),
             'user' => $user,
             'filters' => $request->only('category'),

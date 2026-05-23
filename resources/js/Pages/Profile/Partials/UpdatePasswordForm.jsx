@@ -51,7 +51,7 @@ export default function UpdatePasswordForm({ className = "" }) {
                     Update Password
                 </h2> */}
 
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-gray-600 dark:text-white">
                     Ensure your account is using a long, random password to stay
                     secure.
                 </p>

@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 
 export default function Edit({ mustVerifyEmail, status, hasPassword }) {
     return (
-        <div className="bg-[#F8F6F5]">
+        <div className="bg-[#F8F6F5] dark:bg-[#1F1F1F]">
             <Head title="Profile - Tudus" />
             <div className="mx-auto min-h-dvh max-w-[1540px] justify-between">
                 <div className="mx-6 flex items-center justify-between pt-7 md:mx-14">
@@ -23,11 +23,11 @@ export default function Edit({ mustVerifyEmail, status, hasPassword }) {
                 <div className="mx-6 py-8 md:mx-14">
                     <div className="mx-auto space-y-4 md:space-y-6">
                         <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-6">
-                            <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                                <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
+                            <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md dark:bg-[#161616]">
+                                <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base dark:text-[#d1cfc0]">
                                     Profile Information
                                 </p>
-                                <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
+                                <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8 dark:bg-[#292929]">
                                     <UpdateProfileInformationForm
                                         mustVerifyEmail={mustVerifyEmail}
                                         status={status}
@@ -36,25 +36,25 @@ export default function Edit({ mustVerifyEmail, status, hasPassword }) {
                                 </div>
                             </div>
                             {hasPassword && (
-                                <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                                    <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
+                                <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md dark:bg-[#161616]">
+                                    <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base dark:text-[#d1cfc0]">
                                         Update Password
                                     </p>
-                                    <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
+                                    <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8 dark:bg-[#292929]">
                                         <UpdatePasswordForm className="max-w-xl" />
                                     </div>
                                 </div>
                             )}
                         </div>
-                        <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                            <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
+                        <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md dark:bg-[#161616]">
+                            <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base dark:text-[#d1cfc0]">
                                 Delete Account
                             </p>
-                            <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
+                            <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8 dark:bg-[#292929]">
                                 <DeleteUserForm hasPassword={hasPassword} className="max-w-xl" />
                             </div>
                         </div>
-                        <div className="bottom-5 flex items-center justify-center gap-1.5 text-[13px] text-gray-600">
+                        <div className="bottom-5 flex items-center justify-center gap-1.5 text-[13px] text-gray-600 dark:text-[#d1cfc0]">
                             Project by
                             <a
                                 className="flex aspect-square h-5.5 items-center justify-center rounded-sm bg-orange-500"

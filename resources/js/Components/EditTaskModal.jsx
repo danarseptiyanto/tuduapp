@@ -2,7 +2,12 @@ import { useForm, router } from "@inertiajs/react";
 import TaskModal from "./TaskModal";
 import CategorySelect from "./CategorySelect";
 
-export default function EditTaskModal({ task, onClose, onDelete, categories = [] }) {
+export default function EditTaskModal({
+    task,
+    onClose,
+    onDelete,
+    categories = [],
+}) {
     const form = useForm({
         description: task.description || "",
         deadline: task.deadline ? task.deadline.substring(0, 16) : "",
@@ -26,7 +31,7 @@ export default function EditTaskModal({ task, onClose, onDelete, categories = []
                         form.setData("description", e.target.value)
                     }
                     rows={10}
-                    className="text-heading rounded-base block w-full resize-none rounded-xl border border-gray-300 bg-white p-3.5 text-sm"
+                    className="text-heading rounded-base block w-full resize-none rounded-xl border border-gray-300 bg-white p-3.5 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
                     required
                 />
 
@@ -46,37 +51,41 @@ export default function EditTaskModal({ task, onClose, onDelete, categories = []
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400"
+                            className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-300 px-5 text-sm font-medium transition-all hover:bg-gray-400 dark:hover:bg-[#F9C974]"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
+                            className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400 dark:hover:bg-amber-400"
                         >
                             Save
                         </button>
                     </div>
                 </div>
             </form>
-            <div className="absolute bottom-20 flex w-full flex-col-reverse gap-1.5 pr-[44px] pl-[11px]">
+            <div className="absolute bottom-20 grid w-full grid-cols-2 gap-2 pr-[44px] pl-[11px]">
                 <CategorySelect
                     categories={categories}
                     value={form.data.category_id}
                     onChange={(val) => form.setData("category_id", val)}
                 />
-                <input
-                    type="datetime-local"
-                    value={form.data.deadline}
-                    onChange={(e) => form.setData("deadline", e.target.value)}
-                    className="text-heading block h-8 w-full rounded-lg border border-gray-300 bg-white px-3 pb-2 text-sm"
-                />
-                <label
-                    htmlFor="deadline"
-                    className="text-xs leading-none text-gray-500"
-                >
-                    Deadline
-                </label>
+                <div>
+                    <label
+                        htmlFor="deadline"
+                        className="text-xs leading-none text-gray-500 dark:text-[#d1cfc0]"
+                    >
+                        Deadline
+                    </label>
+                    <input
+                        type="datetime-local"
+                        value={form.data.deadline}
+                        onChange={(e) =>
+                            form.setData("deadline", e.target.value)
+                        }
+                        className="datetime-input text-heading block h-8 w-full rounded-lg border border-gray-300 bg-white pr-0 pb-2 pl-2 text-xs scheme-light md:pr-2 md:text-sm dark:border-white/15 dark:bg-[#292929] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0] dark:scheme-dark"
+                    />
+                </div>
             </div>
         </TaskModal>
     );

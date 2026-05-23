@@ -79,7 +79,7 @@ export default function Login({ status, canResetPassword }) {
                                 setData("remember", e.target.checked)
                             }
                         />
-                        <span className="ms-2 text-xs text-gray-600 md:text-sm">
+                        <span className="ms-2 text-xs text-gray-600 md:text-sm dark:text-[#d1cfc0]">
                             Remember me
                         </span>
                     </label>
@@ -91,12 +91,12 @@ export default function Login({ status, canResetPassword }) {
                         disabled={processing}
                         className="mt-2 h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
                     >
-                        Login
+                        Sign In
                     </button>
                     {canResetPassword && (
                         <Link
                             href={route("password.request")}
-                            className="mt-1.5 rounded-md text-xs text-gray-600 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden md:text-sm"
+                            className="mt-1.5 rounded-md text-xs text-gray-600 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden md:text-sm dark:text-[#d1cfc0] dark:hover:text-white"
                         >
                             Forgot your password?
                         </Link>
@@ -105,14 +105,16 @@ export default function Login({ status, canResetPassword }) {
             </form>
 
             <div className="mt-6 flex items-center justify-center">
-                <span className="w-full border-t border-gray-300"></span>
-                <span className="px-3 text-sm text-gray-500">or</span>
-                <span className="w-full border-t border-gray-300"></span>
+                <span className="w-full border-t border-gray-300 dark:border-white/15"></span>
+                <span className="px-3 text-sm text-gray-500 dark:text-[#d1cfc0]">
+                    or
+                </span>
+                <span className="w-full border-t border-gray-300 dark:border-white/15"></span>
             </div>
             <div className="mt-6">
                 <a
                     href={route("google.redirect")}
-                    className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50"
+                    className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-white/15 dark:bg-[#D1CFC0]/20 dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0] dark:hover:bg-[#D1CFC0]/30"
                 >
                     <svg className="h-5 w-5" viewBox="0 0 24 24">
                         <path
