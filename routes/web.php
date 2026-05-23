@@ -15,9 +15,9 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/', fn () => redirect()->route('tasks.index'));
+Route::get('/', fn() => redirect()->route('tasks.index'));
 
-Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
+Route::get('/dashboard', fn() => redirect()->route('tasks.index'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -44,9 +44,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/manifest.webmanifest', function () {
     $path = public_path('build/manifest.webmanifest');
-    
+
     abort_if(!file_exists($path), 404);
-    
+
     return response()->file($path, [
         'Content-Type' => 'application/manifest+json',
     ]);
@@ -78,4 +78,4 @@ use App\Http\Controllers\Auth\GoogleAuthController;
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('google.callback');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -85,7 +85,14 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end gap-3">
+                <div className="mt-4 flex items-center justify-between gap-3">
+                    <button
+                        type="submit"
+                        disabled={processing}
+                        className="mt-2 h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
+                    >
+                        Login
+                    </button>
                     {canResetPassword && (
                         <Link
                             href={route("password.request")}
@@ -94,14 +101,6 @@ export default function Login({ status, canResetPassword }) {
                             Forgot your password?
                         </Link>
                     )}
-
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="mt-2 h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400"
-                    >
-                        Login
-                    </button>
                 </div>
             </form>
 
@@ -110,7 +109,6 @@ export default function Login({ status, canResetPassword }) {
                 <span className="px-3 text-sm text-gray-500">or</span>
                 <span className="w-full border-t border-gray-300"></span>
             </div>
-
             <div className="mt-6">
                 <a
                     href={route("google.redirect")}

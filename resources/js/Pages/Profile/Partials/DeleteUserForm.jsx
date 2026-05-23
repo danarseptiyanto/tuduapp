@@ -1,13 +1,13 @@
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
-import { useRef, useState } from 'react';
+import DangerButton from "@/Components/DangerButton";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import Modal from "@/Components/Modal";
+import SecondaryButton from "@/Components/SecondaryButton";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
+import { useRef, useState } from "react";
 
-export default function DeleteUserForm({ className = '', hasPassword = true }) {
+export default function DeleteUserForm({ className = "", hasPassword = true }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -20,7 +20,7 @@ export default function DeleteUserForm({ className = '', hasPassword = true }) {
         errors,
         clearErrors,
     } = useForm({
-        password: '',
+        password: "",
     });
 
     const confirmUserDeletion = () => {
@@ -30,7 +30,7 @@ export default function DeleteUserForm({ className = '', hasPassword = true }) {
     const deleteUser = (e) => {
         e.preventDefault();
 
-        destroy(route('profile.destroy'), {
+        destroy(route("profile.destroy"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onError: () => {
@@ -69,14 +69,16 @@ export default function DeleteUserForm({ className = '', hasPassword = true }) {
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6 z-50">
+                <form onSubmit={deleteUser} className="z-50 p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-600 z-50">
+                    <p className="z-50 mt-1 text-sm text-gray-600">
                         Once your account is deleted, all of its resources and
-                        data will be permanently deleted. {hasPassword && "Please enter your password to confirm you would like to permanently delete your account."}
+                        data will be permanently deleted.{" "}
+                        {hasPassword &&
+                            "Please enter your password to confirm you would like to permanently delete your account."}
                     </p>
 
                     {hasPassword && (
@@ -94,7 +96,7 @@ export default function DeleteUserForm({ className = '', hasPassword = true }) {
                                 ref={passwordInput}
                                 value={data.password}
                                 onChange={(e) =>
-                                    setData('password', e.target.value)
+                                    setData("password", e.target.value)
                                 }
                                 className="mt-1 block w-3/4"
                                 isFocused
@@ -108,7 +110,7 @@ export default function DeleteUserForm({ className = '', hasPassword = true }) {
                         </div>
                     )}
 
-                    <div className="mt-6 flex justify-end">
+                    <div className="mt-6 flex justify-start">
                         <SecondaryButton onClick={closeModal}>
                             Cancel
                         </SecondaryButton>

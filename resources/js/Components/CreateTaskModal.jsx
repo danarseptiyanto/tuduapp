@@ -3,7 +3,11 @@ import { useState } from "react";
 import TaskModal from "./TaskModal";
 import CategorySelect from "./CategorySelect";
 
-export default function CreateTaskModal({ onClose, defaultCategoryId, categories = [] }) {
+export default function CreateTaskModal({
+    onClose,
+    defaultCategoryId,
+    categories = [],
+}) {
     const [isCreating, setIsCreating] = useState(false);
 
     const form = useForm({
@@ -43,7 +47,7 @@ export default function CreateTaskModal({ onClose, defaultCategoryId, categories
                     required
                 />
 
-                <div className="flex items-center justify-end gap-2">
+                <div className="flex items-center justify-start gap-2">
                     <div className="flex gap-2">
                         <button
                             type="button"

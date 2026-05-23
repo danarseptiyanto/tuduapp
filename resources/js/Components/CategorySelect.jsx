@@ -13,7 +13,7 @@ export default function CategorySelect({ categories, value, onChange }) {
         query === ""
             ? categories
             : categories.filter((cat) =>
-                  cat.name.toLowerCase().includes(query.toLowerCase())
+                  cat.name.toLowerCase().includes(query.toLowerCase()),
               );
 
     function handleCreate(e) {
@@ -23,19 +23,23 @@ export default function CategorySelect({ categories, value, onChange }) {
         setError("");
         setSubmitting(true);
 
-        router.post("/tasks/categories", { name: newName }, {
-            onSuccess: () => {
-                setNewName("");
-                setCreating(false);
-                setQuery("");
-                setSubmitting(false);
-                router.reload({ only: ["categories"] });
+        router.post(
+            "/tasks/categories",
+            { name: newName },
+            {
+                onSuccess: () => {
+                    setNewName("");
+                    setCreating(false);
+                    setQuery("");
+                    setSubmitting(false);
+                    router.reload({ only: ["categories"] });
+                },
+                onError: (errors) => {
+                    setSubmitting(false);
+                    if (errors.name) setError(errors.name);
+                },
             },
-            onError: (errors) => {
-                setSubmitting(false);
-                if (errors.name) setError(errors.name);
-            },
-        });
+        );
     }
 
     const selected = categories.find((c) => c.id === value) || null;
@@ -132,7 +136,7 @@ export default function CategorySelect({ categories, value, onChange }) {
                         {error && (
                             <p className="text-xs text-red-500">{error}</p>
                         )}
-                        <div className="flex justify-end gap-2">
+                        <div className="flex justify-start gap-2">
                             <button
                                 type="button"
                                 onMouseDown={(e) => e.preventDefault()}

@@ -107,11 +107,11 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="mt-4 flex items-center justify-start">
                     <button
                         type="submit"
                         disabled={processing}
-                        className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400 md:w-min w-full justify-center"
+                        className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#F9C974] px-5 text-sm font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400 md:w-min"
                     >
                         Register
                     </button>
@@ -127,9 +127,9 @@ export default function Register() {
             <div className="mt-6">
                 <a
                     href={route("google.redirect")}
-                    className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 w-full"
+                    className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50"
                 >
-                    <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5" viewBox="0 0 24 24">
                         <path
                             d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                             fill="#4285F4"
