@@ -5,7 +5,7 @@ import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationFor
 import TuduLogo from "@/Components/TuduLogo";
 import PrimaryButton from "@/Components/PrimaryButton";
 
-export default function Edit({ mustVerifyEmail, status }) {
+export default function Edit({ mustVerifyEmail, status, hasPassword }) {
     return (
         <div className="bg-[#F8F6F5]">
             <Head title="Profile - Tudus" />
@@ -35,21 +35,23 @@ export default function Edit({ mustVerifyEmail, status }) {
                                     />
                                 </div>
                             </div>
-                            <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
-                                <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
-                                    Update Password
-                                </p>
-                                <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
-                                    <UpdatePasswordForm className="max-w-xl" />
+                            {hasPassword && (
+                                <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
+                                    <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
+                                        Update Password
+                                    </p>
+                                    <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
+                                        <UpdatePasswordForm className="max-w-xl" />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                         <div className="h-min w-full rounded-[20px] bg-black/5 p-1 backdrop-blur-md">
                             <p className="my-1.5 text-center text-sm font-semibold text-gray-700 md:text-base">
                                 Delete Account
                             </p>
                             <div className="rounded-[18px] bg-white p-4 shadow-sm sm:p-8">
-                                <DeleteUserForm className="max-w-xl" />
+                                <DeleteUserForm hasPassword={hasPassword} className="max-w-xl" />
                             </div>
                         </div>
                         <div className="bottom-5 flex items-center justify-center gap-1.5 text-[13px] text-gray-600">

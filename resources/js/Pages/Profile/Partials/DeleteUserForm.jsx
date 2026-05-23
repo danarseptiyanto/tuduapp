@@ -7,7 +7,7 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useRef, useState } from 'react';
 
-export default function DeleteUserForm({ className = '' }) {
+export default function DeleteUserForm({ className = '', hasPassword = true }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -33,7 +33,11 @@ export default function DeleteUserForm({ className = '' }) {
         destroy(route('profile.destroy'), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
+            onError: () => {
+                if (hasPassword && passwordInput.current) {
+                    passwordInput.current.focus();
+                }
+            },
             onFinish: () => reset(),
         });
     };
@@ -65,44 +69,44 @@ export default function DeleteUserForm({ className = '' }) {
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
+                <form onSubmit={deleteUser} className="p-6 z-50">
                     <h2 className="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-1 text-sm text-gray-600 z-50">
                         Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Please enter your
-                        password to confirm you would like to permanently delete
-                        your account.
+                        data will be permanently deleted. {hasPassword && "Please enter your password to confirm you would like to permanently delete your account."}
                     </p>
 
-                    <div className="mt-6">
-                        <InputLabel
-                            htmlFor="password"
-                            value="Password"
-                            className="sr-only"
-                        />
+                    {hasPassword && (
+                        <div className="mt-6">
+                            <InputLabel
+                                htmlFor="password"
+                                value="Password"
+                                className="sr-only"
+                            />
 
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) =>
-                                setData('password', e.target.value)
-                            }
-                            className="mt-1 block w-3/4"
-                            isFocused
-                            placeholder="Password"
-                        />
+                            <TextInput
+                                id="password"
+                                type="password"
+                                name="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData('password', e.target.value)
+                                }
+                                className="mt-1 block w-3/4"
+                                isFocused
+                                placeholder="Password"
+                            />
 
-                        <InputError
-                            message={errors.password}
-                            className="mt-2"
-                        />
-                    </div>
+                            <InputError
+                                message={errors.password}
+                                className="mt-2"
+                            />
+                        </div>
+                    )}
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
