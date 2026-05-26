@@ -46,4 +46,9 @@
             border-color 0.2s ease,
             color 0.15s ease;
     }
+
+    .dark input::placeholder,
+    .dark textarea::placeholder {
+        color: #d1cfc0;
+    }
 }
