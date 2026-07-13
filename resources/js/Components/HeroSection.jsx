@@ -1,8 +1,13 @@
 import { Link } from "@inertiajs/react";
 import ThemeToggle from "./ThemeToggle";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { usePWAInstall } from "@/Hooks/usePWAInstall";
+import { useDarkMode } from "@/Hooks/useDarkMode";
 
 export default function HeroSection() {
+	const { canInstall, isInstalled, install } = usePWAInstall();
+	const { isDark, toggle } = useDarkMode();
+
 	return (
 		<div className="bg-linear-to-b from-[#F8F6F5] via-white to-black/20 dark:from-[#1A1A1A] dark:via-[#1A1A1A] dark:to-black/40">
 			<div className="max-w-340 px-5 pt-11 pb-9 md:mx-auto md:pb-16">
@@ -58,18 +63,28 @@ export default function HeroSection() {
 							<MenuItem>
 								<Link
 									className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
-									href="/tasks/categories"
+									href="/tasks"
 								>
-									Manage Categories
+									Open Web App
 								</Link>
 							</MenuItem>
+							{canInstall && !isInstalled && (
+								<MenuItem>
+									<button
+										className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
+										onClick={install}
+									>
+										Install App
+									</button>
+								</MenuItem>
+							)}
 							<MenuItem>
-								<Link
+								<button
 									className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
-									href="/tasks/categories"
+									onClick={toggle}
 								>
-									Manage Categories
-								</Link>
+									{isDark ? "Light Mode" : "Dark Mode"}
+								</button>
 							</MenuItem>
 						</MenuItems>
 					</Menu>

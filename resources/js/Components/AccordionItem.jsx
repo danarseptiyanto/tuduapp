@@ -8,10 +8,10 @@ export default function AccordionItem({ question, children }) {
 	return (
 		<Disclosure
 			as="div"
-			className="rounded-xl border border-[#E5E5E5] p-6 dark:border-[#343434] dark:bg-[#2A2A2A]/50"
+			className="rounded-xl border border-[#E5E5E5] p-4 px-5 md:p-6 md:px-6 dark:border-[#343434] dark:bg-[#2A2A2A]/50"
 		>
 			<DisclosureButton className="group flex w-full items-center justify-between">
-				<span className="text-lg font-medium text-[#5B5B5B] group-data-hover:text-[#5B5B5B]/80 dark:text-[#D1D1D1] dark:group-data-hover:text-[#D1D1D1]/80">
+				<span className="text-base font-medium text-[#5B5B5B] group-data-hover:text-[#5B5B5B]/80 md:text-lg dark:text-[#D1D1D1] dark:group-data-hover:text-[#D1D1D1]/80">
 					{question}
 				</span>
 				<div className="size-5 fill-[#5B5B5B]/60 group-data-hover:fill-[#5B5B5B]/50 group-data-open:rotate-180 dark:fill-[#D1D1D1]/60 dark:group-data-hover:fill-[#D1D1D1]/50">
@@ -24,7 +24,7 @@ export default function AccordionItem({ question, children }) {
 					</svg>
 				</div>
 			</DisclosureButton>
-			<DisclosurePanel className="mt-2 text-[#5B5B5B]/70 dark:text-[#A1A1A1]/70">
+			<DisclosurePanel className="mt-2 text-base text-[#5B5B5B]/70 md:text-sm dark:text-[#A1A1A1]/70">
 				{children}
 			</DisclosurePanel>
 		</Disclosure>
