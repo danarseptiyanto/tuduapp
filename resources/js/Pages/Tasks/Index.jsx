@@ -247,10 +247,10 @@ export default function Index({
 								>
 									{items.length === 0 && (
 										<div className="flex h-[calc(100dvh-13rem)] w-full flex-col items-center justify-center rounded-xl border-none border-[#F9C974]/50 py-24 md:h-max md:border-2 md:border-dashed">
-											<p className="text-5xl text-gray-500 md:text-9xl">
+											<p className="text-5xl text-gray-500 md:text-9xl dark:text-gray-200">
 												\(-_-)/
 											</p>
-											<p className="mt-9 text-sm text-gray-500">
+											<p className="mt-9 text-sm text-gray-500 dark:text-gray-200">
 												{selectedCategory
 													? "No tasks in this category."
 													: "You have no task."}
@@ -259,7 +259,7 @@ export default function Index({
 												onClick={() =>
 													setShowCreate(true)
 												}
-												className="mt-4 flex h-10 cursor-pointer items-center gap-2 rounded-full border border-gray-400 px-5 text-sm font-medium whitespace-nowrap text-gray-700 transition-all hover:bg-gray-300"
+												className="mt-4 flex h-10 cursor-pointer items-center gap-2 rounded-full border border-gray-400 px-5 text-sm font-medium whitespace-nowrap text-gray-700 transition-all hover:bg-white/10 dark:text-gray-200 dark:hover:bg-gray-800"
 											>
 												Add a new Task
 											</button>

@@ -10,9 +10,11 @@
 @source "../../storage/framework/views/*.php";
 
 @theme {
-    --font-sans:
-        "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans:
+		"Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+		--breakpoint-hero: 1405px;
 }
 
 /*
@@ -24,31 +26,31 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentcolor);
-    }
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
 
-    html {
-        transition:
-            background-color 0.2s ease,
-            color 0.2s ease;
-    }
+	html {
+		transition:
+			background-color 0.2s ease,
+			color 0.2s ease;
+	}
 
-    html *,
-    html ::after,
-    html ::before {
-        transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.15s ease;
-    }
+	html *,
+	html ::after,
+	html ::before {
+		transition:
+			background-color 0.2s ease,
+			border-color 0.2s ease,
+			color 0.15s ease;
+	}
 
-    .dark input::placeholder,
-    .dark textarea::placeholder {
-        color: #d1cfc0;
-    }
+	.dark input::placeholder,
+	.dark textarea::placeholder {
+		color: #d1cfc0;
+	}
 }
