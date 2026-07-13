@@ -107,24 +107,24 @@ export default function HeroSection() {
 				</div>
 				<div className="hero:-mx-5 mx-0 hidden md:block">
 					<img
-						src="/img/ss-app-light.png"
+						src="https://ik.imagekit.io/dnrx/tudus/img/ss-app-light.png"
 						className="mt-15 rounded-2xl border border-[#E5E5E5] dark:hidden dark:border-[#343434]/70"
 						alt=""
 					/>
 					<img
-						src="/img/ss-app-dark.png"
+						src="https://ik.imagekit.io/dnrx/tudus/img/ss-app-dark.png"
 						className="mt-15 hidden rounded-2xl border border-[#E5E5E5] dark:block dark:border-[#343434]/70"
 						alt=""
 					/>
 				</div>
 				<div className="block md:hidden">
 					<img
-						src="/img/mb-ss-app-light.png"
+						src="https://ik.imagekit.io/dnrx/tudus/img/mb-ss-app-light.png"
 						className="mt-8 rounded-xl border border-[#E5E5E5] dark:hidden dark:border-[#343434]/70"
 						alt=""
 					/>
 					<img
-						src="/img/mb-ss-app-dark.png"
+						src="https://ik.imagekit.io/dnrx/tudus/img/mb-ss-app-dark.png"
 						className="mt-8 hidden rounded-xl border border-[#E5E5E5] dark:block dark:border-[#343434]/70"
 						alt=""
 					/>

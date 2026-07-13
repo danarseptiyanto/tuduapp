@@ -13,8 +13,8 @@ export default function FeaturesSection() {
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 					<div className="col-span-1 w-full rounded-xl border border-[#E5E5E5] bg-white p-5 pr-0 md:col-span-2 md:p-10 md:pr-0 dark:border-[#343434] dark:bg-[#2A2A2A]">
 						<img
-							src="/img/image1-light.png"
-							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left"
+							src="https://ik.imagekit.io/dnrx/tudus/img/image1-light.png"
+							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left md:aspect-auto"
 						/>
 						<p className="block pb-1 text-lg font-medium tracking-tight text-black md:hidden md:pb-1.5 md:text-xl dark:text-white">
 							Simple yet powerful
@@ -34,8 +34,8 @@ export default function FeaturesSection() {
 					</div>
 					<div className="w-full rounded-xl border border-[#E5E5E5] bg-white p-5 pr-0 md:p-10 md:pr-0 dark:border-[#343434] dark:bg-[#2A2A2A]">
 						<img
-							src="/img/image2-light.png"
-							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-bottom-left"
+							src="https://ik.imagekit.io/dnrx/tudus/img/image2-light.png"
+							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-bottom-left md:aspect-auto"
 						/>
 						<p className="pb-1 text-lg font-medium tracking-tight text-black md:pb-1.5 md:text-xl dark:text-white">
 							Set deadline on your task
@@ -47,8 +47,8 @@ export default function FeaturesSection() {
 					</div>
 					<div className="w-full rounded-xl border border-[#E5E5E5] bg-white p-5 pr-0 md:p-10 md:pr-0 dark:border-[#343434] dark:bg-[#2A2A2A]">
 						<img
-							src="/img/image3-light.png"
-							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left"
+							src="https://ik.imagekit.io/dnrx/tudus/img/image3-light.png"
+							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left md:aspect-auto"
 						/>
 						<p className="pb-1 text-lg font-medium tracking-tight text-black md:pb-1.5 md:text-xl dark:text-white">
 							The mobile app version
@@ -60,8 +60,8 @@ export default function FeaturesSection() {
 					</div>
 					<div className="col-span-1 w-full rounded-xl border border-[#E5E5E5] bg-white p-5 pr-0 md:col-span-2 md:p-10 md:pr-0 dark:border-[#343434] dark:bg-[#2A2A2A]">
 						<img
-							src="/img/image4-light.png"
-							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left"
+							src="https://ik.imagekit.io/dnrx/tudus/img/image4-light.png"
+							className="mb-6 block aspect-16/12 w-full rounded-l-lg object-cover object-top-left md:aspect-auto"
 						/>
 						<p className="pb-1 text-lg font-medium tracking-tight text-black md:pb-1.5 md:text-xl dark:text-white">
 							Fully open source

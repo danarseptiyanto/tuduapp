@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useDarkMode() {
 	const [isDark, setIsDark] = useState(() => {
-		return localStorage.getItem("theme") === "dark";
+		return localStorage.getItem("theme") !== "light";
 	});
 
 	useEffect(() => {
@@ -12,7 +12,6 @@ export function useDarkMode() {
 		} else {
 			document.documentElement.classList.remove("dark");
 		}
-
 		const themeColorMeta = document.querySelector(
 			'meta[name="theme-color"]',
 		);

@@ -1,6 +1,11 @@
+import { Link } from "@inertiajs/react";
+
 export default function TuduLogo() {
 	return (
-		<div className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-xl bg-[#F9C974]">
+		<Link
+			href="/"
+			className="flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-xl bg-[#F9C974]"
+		>
 			<svg
 				className="h-4.5 w-4.5 fill-gray-800 dark:fill-black"
 				viewBox="0 0 176 178"
@@ -11,6 +16,6 @@ export default function TuduLogo() {
 				<path d="M73.9862 103.701C68.8211 98.5645 68.7971 90.213 73.9339 85.048C79.0708 79.8829 87.4222 79.8589 92.5873 84.9957L106.413 98.6902L150.034 54.1705C155.143 48.9772 163.494 48.9065 168.689 54.0151C173.883 59.1237 173.953 67.4751 168.845 72.6699L115.907 126.696C110.77 131.861 102.419 131.885 97.2538 126.749L73.9876 103.701H73.9862Z" />
 				<path d="M114.424 42.1948C121.729 42.1948 127.652 48.1184 127.652 55.4232C127.652 62.728 121.729 68.6516 114.424 68.6516H13.2284C5.92353 68.6516 0 62.728 0 55.4232C0 48.1184 5.92353 42.1948 13.2284 42.1948H114.424Z" />
 			</svg>
-		</div>
+		</Link>
 	);
 }

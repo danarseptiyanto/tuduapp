@@ -158,9 +158,9 @@ export default function CategorySelect({ categories, value, onChange }) {
 							<button
 								type="submit"
 								disabled={submitting || !newName.trim()}
-								className="rounded-full bg-[#F9C974] px-3 py-1.5 text-xs font-medium text-black transition-all hover:bg-amber-400 disabled:opacity-50 md:text-sm"
+								className="rounded-full bg-[#F9C974] px-3 py-1.5 text-xs font-medium text-black transition-all hover:bg-amber-400 md:text-sm"
 							>
-								{submitting ? "Creating..." : " "}
+								{submitting ? "Creating..." : "Save"}
 							</button>
 						</div>
 					</form>

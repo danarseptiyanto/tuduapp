@@ -63,7 +63,7 @@ export default function CreateTaskModal({
 						className="text-heading rounded-base block w-full resize-none rounded-xl border border-gray-300 bg-white p-3.5 pr-12 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
 						required
 					/>
-					{isSupported && (
+					{/* {isSupported && (
 						<button
 							type="button"
 							onClick={isListening ? stop : start}
@@ -88,7 +88,7 @@ export default function CreateTaskModal({
 								<path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
 							</svg>
 						</button>
-					)}
+					)}*/}
 				</div>
 
 				<div className="flex items-center justify-start gap-2">
