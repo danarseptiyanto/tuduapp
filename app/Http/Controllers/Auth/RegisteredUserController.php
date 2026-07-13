@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('tasks.index', absolute: false));
+        return redirect(route('tasks.index', absolute: false))
+            ->with('success', 'Account created successfully!');
     }
 }
