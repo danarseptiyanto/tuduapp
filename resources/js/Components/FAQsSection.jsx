@@ -8,25 +8,35 @@ export default function FAQsSection() {
 					Frequently Asked Questions
 				</p>
 				<div className="mx-auto w-full max-w-5xl space-y-3 md:space-y-3.5">
-					<AccordionItem question="What is your refund policy?">
-						If you're unhappy with your purchase, we'll refund you
-						in full.
+					<AccordionItem question="Is Tudus really free?">
+						Yes, Tudus is completely free with no hidden costs, no
+						ads, and no premium tiers. It's also open source, so you
+						can view the entire codebase on GitHub.
 					</AccordionItem>
-					<AccordionItem question="What is your refund policy?">
-						If you're unhappy with your purchase, we'll refund you
-						in full.
+					<AccordionItem question="How is Tudus different?">
+						Tudus is built to be "just right", not bloated with
+						unnecessary features, but not too minimal either. It
+						focuses on what's essential: tasks, categories,
+						deadlines with live countdowns, and a serene
+						drag-and-drop interface that stays out of your way.
 					</AccordionItem>
-					<AccordionItem question="What is your refund policy?">
-						If you're unhappy with your purchase, we'll refund you
-						in full.
+					<AccordionItem question="Can I use Tudus on my phone?">
+						Absolutely! Tudus is a Progressive Web App (PWA), which
+						means you can install it directly on your phone, tablet,
+						or desktop, no app store required. It works offline too,
+						so you can manage your tasks anywhere.
 					</AccordionItem>
-					<AccordionItem question="What is your refund policy?">
-						If you're unhappy with your purchase, we'll refund you
-						in full.
+					<AccordionItem question="How does voice input work?">
+						When creating a task, just click the microphone button
+						and start speaking. Tudus uses your browser's built-in
+						speech recognition to convert your voice into text, a
+						quick, hands-free way to capture tasks on the go.
 					</AccordionItem>
-					<AccordionItem question="What is your refund policy?">
-						If you're unhappy with your purchase, we'll refund you
-						in full.
+					<AccordionItem question="Is my data safe?">
+						Your data stays on the server you're connected to. Tudus
+						is open source and transparent by design, so you can
+						audit the code yourself, self-host it if you prefer, and
+						there are no third-party trackers or analytics.
 					</AccordionItem>
 				</div>
 			</div>

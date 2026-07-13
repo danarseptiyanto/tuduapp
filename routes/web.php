@@ -15,13 +15,13 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/', fn() => redirect()->route('tasks.index'));
+Route::get('/', fn(\Illuminate\Http\Request $request) => redirect()->route($request->user() ? 'tasks.index' : 'home'));
 
 Route::get('/dashboard', fn() => redirect()->route('tasks.index'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/home', fn() => Inertia::render('Home'))->name('home');
+Route::get('/home', fn() => Inertia::render('Home'))->name('home')->middleware('guest');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

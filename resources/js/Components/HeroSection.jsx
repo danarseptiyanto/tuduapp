@@ -5,7 +5,7 @@ import { usePWAInstall } from "@/Hooks/usePWAInstall";
 import { useDarkMode } from "@/Hooks/useDarkMode";
 
 export default function HeroSection() {
-	const { canInstall, isInstalled, install } = usePWAInstall();
+	const { install } = usePWAInstall();
 	const { isDark, toggle } = useDarkMode();
 
 	return (
@@ -30,12 +30,12 @@ export default function HeroSection() {
 						</p>
 					</div>
 					<div className="hidden items-center gap-2 md:flex">
-						<Link
-							href="/tasks"
+						<button
+							onClick={install}
 							className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full px-1 text-[15px] font-medium whitespace-nowrap text-black dark:text-[#D1CFC0]"
 						>
 							Install App
-						</Link>
+						</button>
 						<Link
 							href="/tasks"
 							className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#D9D9D9] px-4 text-[15px] font-medium whitespace-nowrap text-black transition-all hover:bg-gray-400 dark:bg-[#D1CFC0] dark:hover:bg-[#D1CFC0]/80"
@@ -68,16 +68,14 @@ export default function HeroSection() {
 									Open Web App
 								</Link>
 							</MenuItem>
-							{canInstall && !isInstalled && (
-								<MenuItem>
-									<button
-										className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
-										onClick={install}
-									>
-										Install App
-									</button>
-								</MenuItem>
-							)}
+							<MenuItem>
+								<button
+									className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
+									onClick={install}
+								>
+									Install App
+								</button>
+							</MenuItem>
 							<MenuItem>
 								<button
 									className="inline-flex w-full items-center rounded-lg p-2 text-sm text-gray-700 hover:bg-[#F9C974]/20 hover:text-gray-900 dark:text-[#D1CFC0] dark:hover:text-white"
@@ -100,12 +98,12 @@ export default function HeroSection() {
 					>
 						Open App
 					</Link>
-					<Link
-						href="/tasks"
+					<button
+						onClick={install}
 						className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full px-5 text-[15px] font-medium whitespace-nowrap text-black transition-all md:h-12.5 md:text-base dark:text-white"
 					>
 						Install App
-					</Link>
+					</button>
 				</div>
 				<div className="hero:-mx-5 mx-0 hidden md:block">
 					<img
