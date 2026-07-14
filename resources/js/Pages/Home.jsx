@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { router } from "@inertiajs/react";
 import HeroSection from "@/Components/HeroSection";
 import FeaturesSection from "@/Components/FeaturesSection";
 import FAQsSection from "@/Components/FAQsSection";
@@ -5,9 +7,22 @@ import CTASection from "@/Components/CTASection";
 import Footer from "@/Components/Footer";
 import { Toaster } from "sonner";
 import { useFlash } from "@/Hooks/useFlash";
+import { usePWAInstall } from "@/Hooks/usePWAInstall";
 
 export default function Home() {
 	useFlash();
+
+	const { isInstalled } = usePWAInstall();
+
+	useEffect(() => {
+		if (isInstalled) {
+			router.visit(route("tasks.index"));
+		}
+	}, [isInstalled]);
+
+	if (isInstalled) {
+		return null;
+	}
 
 	return (
 		<>
