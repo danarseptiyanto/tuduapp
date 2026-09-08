@@ -34,14 +34,38 @@ export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
 								{archivedTasks.map((task) => {
 									const bgColor =
 										colorMap[task.color] || "bg-gray-100";
+									const isChecklist =
+										task.type === "checklist" &&
+										Array.isArray(task.checklistItems);
+									const done = isChecklist
+										? task.checklistItems.filter(
+												(i) => i.is_done,
+											).length
+										: 0;
+									const total = isChecklist
+										? task.checklistItems.length
+										: 0;
 									return (
 										<div
 											key={task.id}
 											className={`min-h-[65px] rounded-xl px-5 py-4 text-sm opacity-80 dark:bg-[#1F1F1F] ${bgColor}`}
 										>
-											<p className="line-clamp-2 text-[13px] leading-snug whitespace-pre-wrap text-black dark:text-white">
-												{task.description}
-											</p>
+											{isChecklist ? (
+												<>
+													{task.description && (
+														<p className="line-clamp-2 text-[13px] leading-snug font-medium whitespace-pre-wrap text-black dark:text-white">
+															{task.description}
+														</p>
+													)}
+													<p className="mt-1 text-xs text-gray-700 dark:text-white/70">
+														✓ {done}/{total} done
+													</p>
+												</>
+											) : (
+												<p className="line-clamp-2 text-[13px] leading-snug whitespace-pre-wrap text-black dark:text-white">
+													{task.description}
+												</p>
+											)}
 											<button
 												onClick={() =>
 													onUnarchive(task.id)

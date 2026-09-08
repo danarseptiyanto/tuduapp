@@ -24,7 +24,6 @@ export default defineConfig({
 				name: "Tudus",
 				short_name: "Tudus",
 				description: "Tudus by danars.net",
-				theme_color: "#F9C974",
 				background_color: "#F9C974",
 				display: "standalone",
 				orientation: "portrait",

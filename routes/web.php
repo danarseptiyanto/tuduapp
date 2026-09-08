@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChecklistItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/tasks/{task}/archive', [TaskController::class, 'archive']);
     Route::post('/tasks/{task}/unarchive', [TaskController::class, 'unarchive']);
     Route::post('/tasks/reorder', [TaskController::class, 'reorder']);
+    Route::post('/tasks/{task}/items', [ChecklistItemController::class, 'store']);
+    Route::patch('/tasks/{task}/items/{item}', [ChecklistItemController::class, 'update']);
+    Route::patch('/tasks/{task}/items/{item}/toggle', [ChecklistItemController::class, 'toggle']);
+    Route::delete('/tasks/{task}/items/{item}', [ChecklistItemController::class, 'destroy']);
 
     Route::get('/tasks/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/tasks/categories', [CategoryController::class, 'store'])->name('categories.store');

@@ -10,6 +10,7 @@ class Task extends Model
         'user_id',
         'category_id',
         'description',
+        'type',
         'deadline',
         'archived',
         'order',
@@ -24,5 +25,15 @@ class Task extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function checklistItems()
+    {
+        return $this->hasMany(ChecklistItem::class)->orderBy('order');
+    }
+
+    public function isChecklist(): bool
+    {
+        return $this->type === 'checklist';
     }
 }
