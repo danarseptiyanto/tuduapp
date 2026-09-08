@@ -23,12 +23,13 @@ class TaskController extends Controller
         }
 
         return Inertia::render('Tasks/Index', [
-            'tasks' => $query->with('category')->get(),
+            'tasks' => $query->with(['category', 'checklistItems'])->get(),
             'categories' => $user->categories,
             'archivedTasks' => Task::where('user_id', auth()->id())
                 ->where('archived', true)
                 ->orderByDesc('updated_at')
                 ->limit(10)
+                ->with(['category', 'checklistItems'])
                 ->get(),
             'user' => $user,
             'filters' => $request->only('category'),
@@ -37,10 +38,14 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'description' => 'nullable|string',
+            'type' => 'nullable|in:note,checklist',
             'deadline' => 'nullable|date',
             'category_id' => 'nullable|exists:categories,id',
+            'items' => 'nullable|array',
+            'items.*.label' => 'required_with:items|string|max:1000',
+            'items.*.is_done' => 'nullable|boolean',
         ]);
 
         $userId = auth()->id();
@@ -54,16 +59,34 @@ class TaskController extends Controller
             ->where('archived', false)
             ->increment('order');
 
+        $type = $validated['type'] ?? 'note';
+
         // Create new task at top
-        Task::create([
+        $task = Task::create([
             'user_id' => $userId,
-            'category_id' => $request->category_id,
-            'description' => $request->description,
-            'deadline' => $request->deadline,
+            'category_id' => $validated['category_id'] ?? null,
+            'description' => $validated['description'] ?? null,
+            'type' => $type,
+            'deadline' => $validated['deadline'] ?? null,
             'archived' => false,
             'order' => 0,
             'color' => $randomColor,
         ]);
+
+        if ($type === 'checklist' && !empty($validated['items'])) {
+            $order = 0;
+            foreach ($validated['items'] as $item) {
+                $label = trim($item['label'] ?? '');
+                if ($label === '') {
+                    continue;
+                }
+                $task->checklistItems()->create([
+                    'label' => $label,
+                    'is_done' => (bool) ($item['is_done'] ?? false),
+                    'order' => $order++,
+                ]);
+            }
+        }
 
         return redirect()->back()->with('success', 'Task created successfully!');
     }
@@ -74,13 +97,68 @@ class TaskController extends Controller
             abort(403);
         }
 
-        $task->update(
-            $request->validate([
-                'description' => 'nullable|string',
-                'deadline' => 'nullable|date',
-                'category_id' => 'nullable|exists:categories,id',
-            ])
-        );
+        $validated = $request->validate([
+            'description' => 'nullable|string',
+            'type' => 'nullable|in:note,checklist',
+            'deadline' => 'nullable|date',
+            'category_id' => 'nullable|exists:categories,id',
+            'items' => 'nullable|array',
+            'items.*.id' => 'nullable|integer|exists:checklist_items,id',
+            'items.*.label' => 'required_with:items|string|max:1000',
+            'items.*.is_done' => 'nullable|boolean',
+            'items.*.order' => 'nullable|integer|min:0',
+        ]);
+
+        $task->update([
+            'description' => $validated['description'] ?? $task->description,
+            'type' => $validated['type'] ?? $task->type,
+            'deadline' => $validated['deadline'] ?? null,
+            'category_id' => $validated['category_id'] ?? null,
+        ]);
+
+        $wasChecklist = $task->getOriginal('type') === 'checklist';
+        $isChecklistNow = $task->type === 'checklist';
+
+        if (array_key_exists('items', $validated)) {
+            // Explicit items payload (possibly empty) → full sync.
+            $incoming = $validated['items'] ?? [];
+            $keepIds = [];
+
+            foreach (array_values($incoming) as $index => $item) {
+                $label = trim($item['label'] ?? '');
+                if ($label === '') {
+                    continue;
+                }
+                $order = $item['order'] ?? $index;
+                $isDone = (bool) ($item['is_done'] ?? false);
+
+                if (!empty($item['id'])) {
+                    $existing = $task->checklistItems()->where('id', $item['id'])->first();
+                    if ($existing) {
+                        $existing->update([
+                            'label' => $label,
+                            'is_done' => $isDone,
+                            'order' => $order,
+                        ]);
+                        $keepIds[] = $existing->id;
+                    }
+                } else {
+                    $created = $task->checklistItems()->create([
+                        'label' => $label,
+                        'is_done' => $isDone,
+                        'order' => $order,
+                    ]);
+                    $keepIds[] = $created->id;
+                }
+            }
+
+            // Delete items that were removed in the editor.
+            $task->checklistItems()->whereNotIn('id', $keepIds)->delete();
+        } elseif ($wasChecklist && ! $isChecklistNow) {
+            // Converted back to a plain note without an items payload → discard items.
+            $task->checklistItems()->delete();
+        }
+        // Otherwise (e.g. title/deadline-only update): leave items untouched.
 
         return back()->with('success', 'Task updated successfully!');
     }

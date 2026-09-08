@@ -1,6 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useState, useEffect } from "react";
+import { router } from "@inertiajs/react";
 
 const colorMap = {
 	orange: "bg-orange-300",
@@ -14,6 +15,8 @@ const colorMap = {
 	emerald: "bg-emerald-300",
 	green: "bg-green-300",
 };
+
+const PREVIEW_LIMIT = 6;
 
 export default function TaskItem({ task, onEdit, onDelete }) {
 	const {
@@ -35,6 +38,35 @@ export default function TaskItem({ task, onEdit, onDelete }) {
 	};
 
 	const [timeLeft, setTimeLeft] = useState("");
+
+	const isChecklist =
+		task.type === "checklist" && Array.isArray(task.checklistItems);
+	const [localItems, setLocalItems] = useState(task.checklistItems || []);
+
+	useEffect(() => {
+		setLocalItems(task.checklistItems || []);
+	}, [task.checklistItems]);
+
+	const doneCount = localItems.filter((i) => i.is_done).length;
+	const totalCount = localItems.length;
+	const progress =
+		totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+
+	function toggleItem(item) {
+		const next = localItems.map((i) =>
+			i.id === item.id ? { ...i, is_done: !i.is_done } : i,
+		);
+		setLocalItems(next);
+		router.patch(
+			`/tasks/${task.id}/items/${item.id}/toggle`,
+			{},
+			{
+				preserveScroll: true,
+				preserveState: true,
+				onError: () => setLocalItems(task.checklistItems || []),
+			},
+		);
+	}
 
 	useEffect(() => {
 		if (!task.deadline) {
@@ -109,10 +141,100 @@ export default function TaskItem({ task, onEdit, onDelete }) {
 				</svg>
 			</div>
 			<div className="flex h-full flex-col justify-between">
-				<div className="h-full justify-between px-4 pt-5.5 text-gray-800 md:px-6 md:pt-6 dark:text-white">
-					<p className="line-clamp-4 text-[13px] leading-snug whitespace-pre-wrap md:line-clamp-none md:text-[14px]">
-						{task.description}
-					</p>
+				<div className="h-full justify-between overflow-hidden px-4 pt-5.5 text-gray-800 md:px-6 md:pt-6 dark:text-white">
+					{isChecklist ? (
+						<div className="flex h-full max-h-full flex-col">
+							{task.description && (
+								<p className="line-clamp-2 text-[13px] leading-snug font-medium whitespace-pre-wrap md:text-[14px]">
+									{task.description}
+								</p>
+							)}
+							<p className="mt-1 text-[11px] font-light text-gray-700 md:text-xs dark:text-white/70">
+								{doneCount}/{totalCount} done
+							</p>
+							<div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
+								<div
+									className="h-full rounded-full bg-black/60 transition-all dark:bg-[#F9C974]"
+									style={{ width: `${progress}%` }}
+								/>
+							</div>
+							<div className="relative z-10 mt-2 space-y-1 overflow-hidden">
+								{localItems
+									.slice(0, PREVIEW_LIMIT)
+									.map((item) => (
+										<div
+											key={item.id}
+											className="flex items-center gap-1.5"
+											onPointerDown={(e) =>
+												e.stopPropagation()
+											}
+										>
+											<button
+												onPointerDown={(e) =>
+													e.stopPropagation()
+												}
+												onClick={(e) => {
+													e.stopPropagation();
+													toggleItem(item);
+												}}
+												aria-label={
+													item.is_done
+														? "Mark as not done"
+														: "Mark as done"
+												}
+												className={`flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded border transition-colors ${
+													item.is_done
+														? "border-black bg-black text-white dark:border-[#F9C974] dark:bg-[#F9C974] dark:text-black"
+														: "border-gray-600/40 bg-transparent hover:border-black dark:border-white/40 dark:hover:border-white"
+												}`}
+											>
+												{item.is_done && (
+													<svg
+														className="h-2.5 w-2.5"
+														viewBox="0 0 12 12"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															d="M2.5 6.5L5 9L9.5 3.5"
+															stroke="currentColor"
+															strokeWidth="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														/>
+													</svg>
+												)}
+											</button>
+											<span
+												className={`line-clamp-1 text-[12px] leading-snug md:text-[13px] ${
+													item.is_done
+														? "text-gray-600 line-through opacity-70 dark:text-white/50"
+														: ""
+												}`}
+											>
+												{item.label}
+											</span>
+										</div>
+									))}
+								{totalCount > PREVIEW_LIMIT && (
+									<p className="text-[11px] font-light text-gray-600 dark:text-white/60">
+										+ {totalCount - PREVIEW_LIMIT} more
+									</p>
+								)}
+								{totalCount === 0 && (
+									<p className="text-[12px] text-gray-600 italic dark:text-white/60">
+										Empty checklist
+									</p>
+								)}
+							</div>
+						</div>
+					) : (
+						<>
+							<p className="line-clamp-4 text-[13px] leading-snug whitespace-pre-wrap md:line-clamp-none md:text-[14px]">
+								{task.description}
+							</p>
+						</>
+					)}
 					{task.category && (
 						<div className="mt-2 w-fit rounded-md bg-black/5 px-1.5 py-1 dark:bg-white/5">
 							<p className="text-[11px] font-light md:text-xs">

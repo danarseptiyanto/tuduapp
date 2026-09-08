@@ -1,8 +1,8 @@
 import { useForm, router } from "@inertiajs/react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import TaskModal from "./TaskModal";
 import CategorySelect from "./CategorySelect";
-import useSpeechRecognition from "../Hooks/useSpeechRecognition";
+import ChecklistEditor from "./ChecklistEditor";
 
 export default function CreateTaskModal({
 	onClose,
@@ -10,6 +10,9 @@ export default function CreateTaskModal({
 	categories = [],
 }) {
 	const [isCreating, setIsCreating] = useState(false);
+	const [mode, setMode] = useState("note");
+	const [items, setItems] = useState([{ label: "", is_done: false }]);
+	const [itemsError, setItemsError] = useState("");
 
 	const form = useForm({
 		description: "",
@@ -17,78 +20,117 @@ export default function CreateTaskModal({
 		category_id: defaultCategoryId || null,
 	});
 
-	const handleSpeechResult = useCallback(
-		(transcript) => {
-			const prev = form.data.description;
-			form.setData(
-				"description",
-				prev ? prev + " " + transcript : transcript,
-			);
-		},
-		[form],
-	);
-
-	const { isListening, start, stop, isSupported } = useSpeechRecognition({
-		onResult: handleSpeechResult,
-	});
-
 	function handleSubmit(e) {
 		e.preventDefault();
+
+		if (mode === "checklist") {
+			const filled = items.filter((i) => i.label.trim() !== "");
+			if (filled.length === 0) {
+				setItemsError("Add at least one item to your checklist.");
+				return;
+			}
+			setItemsError("");
+		}
+
 		setIsCreating(true);
 
-		form.post("/tasks", {
-			preserveScroll: true,
-			onSuccess: () => {
-				form.reset("description", "deadline");
-				onClose();
-				router.reload({ only: ["tasks"] });
+		router.post(
+			"/tasks",
+			{
+				description: form.data.description,
+				deadline: form.data.deadline || null,
+				category_id: form.data.category_id,
+				type: mode,
+				items:
+					mode === "checklist"
+						? items
+								.filter((i) => i.label.trim() !== "")
+								.map((i) => ({
+									label: i.label.trim(),
+									is_done: !!i.is_done,
+								}))
+						: [],
 			},
-			onFinish: () => {
-				setIsCreating(false);
+			{
+				preserveScroll: true,
+				onSuccess: () => {
+					form.reset("description", "deadline");
+					setItems([{ label: "", is_done: false }]);
+					onClose();
+					router.reload({ only: ["tasks"] });
+				},
+				onFinish: () => {
+					setIsCreating(false);
+				},
 			},
-		});
+		);
 	}
 
 	return (
 		<TaskModal title="Create Task" onClose={onClose}>
+			{/* Note / Checklist toggle */}
+			<div className="mb-3 flex w-fit rounded-full bg-gray-100 p-1 dark:bg-white/10">
+				{["note", "checklist"].map((m) => (
+					<button
+						key={m}
+						type="button"
+						onClick={() => setMode(m)}
+						className={`cursor-pointer rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+							mode === m
+								? "bg-[#F9C974] text-black shadow-sm"
+								: "text-gray-500 hover:text-gray-800 dark:text-[#d1cfc0]/70 dark:hover:text-white"
+						}`}
+					>
+						{m === "note" ? "Note" : "Checklist"}
+					</button>
+				))}
+			</div>
+
 			<form onSubmit={handleSubmit} className="space-y-3">
 				<div className="relative">
-					<textarea
-						placeholder="Task description"
-						value={form.data.description}
-						onChange={(e) =>
-							form.setData("description", e.target.value)
-						}
-						rows={10}
-						className="text-heading rounded-base block w-full resize-none rounded-xl border border-gray-300 bg-white p-3.5 pr-12 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
-						required
-					/>
-					{/* {isSupported && (
-						<button
-							type="button"
-							onClick={isListening ? stop : start}
-							className={`absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
-								isListening
-									? "animate-pulse bg-red-500 text-white"
-									: "bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-white/10 dark:text-[#D1CFC0] dark:hover:bg-white/20"
-							}`}
-							title={
-								isListening
-									? "Stop listening"
-									: "Start voice input"
+					{mode === "note" ? (
+						<textarea
+							placeholder="Task description"
+							value={form.data.description}
+							onChange={(e) =>
+								form.setData("description", e.target.value)
 							}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								fill="currentColor"
-								className="h-4 w-4"
-							>
-								<path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
-								<path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
-							</svg>
-						</button>
-					)}*/}
+							rows={10}
+							className="text-heading rounded-base block w-full resize-none rounded-xl border border-gray-300 bg-white p-3.5 pr-12 text-sm dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
+							required
+						/>
+					) : (
+						<div className="space-y-3">
+							<input
+								type="text"
+								placeholder="Checklist title (optional)"
+								value={form.data.description}
+								onChange={(e) =>
+									form.setData("description", e.target.value)
+								}
+								className="text-heading block w-full rounded-xl border border-gray-300 bg-white p-3.5 text-sm font-medium dark:border-white/15 dark:bg-[#1F1F1F] dark:text-[#D1CFC0] dark:placeholder-[#d1cfc0]"
+							/>
+							<div className="max-h-[38dvh] overflow-y-auto rounded-xl border border-gray-300 bg-white p-3 dark:border-white/15 dark:bg-[#1F1F1F]">
+								<ChecklistEditor
+									items={items}
+									onChange={(next) => {
+										setItems(next);
+										if (
+											next.some(
+												(i) => i.label.trim() !== "",
+											)
+										)
+											setItemsError("");
+									}}
+								/>
+								{itemsError && (
+									<p className="mt-2 text-xs text-red-500">
+										{itemsError}
+									</p>
+								)}
+							</div>
+						</div>
+					)}
 				</div>
 
 				<div className="flex items-center justify-start gap-2">
@@ -110,7 +152,11 @@ export default function CreateTaskModal({
 									: " text-black"
 							}`}
 						>
-							{isCreating ? "Saving..." : "Create Task"}
+							{isCreating
+								? "Saving..."
+								: mode === "checklist"
+									? "Create Checklist"
+									: "Create Task"}
 						</button>
 					</div>
 				</div>

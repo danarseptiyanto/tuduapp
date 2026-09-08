@@ -58,7 +58,17 @@ export default function Index({
 	}, []);
 
 	/* ===== LOCAL STATE ===== */
-	const [items, setItems] = useState(tasks);
+	// Laravel serializes the `checklistItems` relation as `checklist_items`
+	// (snake_case), so normalize it once here. Everything downstream
+	// (TaskItem, EditTaskModal, DragPreview, Sidebar) uses `checklistItems`.
+	const normalizeTask = (t) =>
+		t
+			? {
+					...t,
+					checklistItems: t.checklistItems ?? t.checklist_items ?? [],
+				}
+			: t;
+	const [items, setItems] = useState(() => tasks.map(normalizeTask));
 	const [activeTask, setActiveTask] = useState(null);
 	const [showCreate, setShowCreate] = useState(false);
 	const [editingTask, setEditingTask] = useState(null);
@@ -69,7 +79,7 @@ export default function Index({
 	const { isDark, toggle } = useDarkMode();
 
 	useEffect(() => {
-		setItems(tasks);
+		setItems(tasks.map(normalizeTask));
 	}, [tasks]);
 
 	/* ===== DELETE ===== */
@@ -301,7 +311,7 @@ export default function Index({
 							)}
 						</div>
 						<Sidebar
-							archivedTasks={archivedTasks}
+							archivedTasks={archivedTasks.map(normalizeTask)}
 							onUnarchive={unarchiveTask}
 						>
 							<div className="fixed bottom-0 left-0 z-40 block w-full rounded-t-3xl bg-white p-2 md:static md:p-0 dark:bg-[#292929] dark:md:bg-[#161616]">
