@@ -2,9 +2,9 @@
 
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @plugin "@tailwindcss/forms";
+
+@custom-variant standalone (@media (display-mode: standalone));
 
 @custom-variant dark (&:where(.dark, .dark *));
 

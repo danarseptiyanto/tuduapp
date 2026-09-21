@@ -15,7 +15,7 @@ const colorMap = {
 
 export default function Sidebar({ archivedTasks = [], onUnarchive, children }) {
 	return (
-		<div className="sticky top-0 h-dvh w-0 overflow-hidden bg-white p-0 md:w-[396px] md:p-6 dark:bg-[#161616]">
+		<div className="md:standalone:rounded-tl-4xl md:standalone:top-2 sticky top-0 h-dvh w-0 overflow-hidden bg-white p-0 md:w-[396px] md:p-6 dark:bg-[#161616]">
 			<div className="h-full">
 				{children}
 				<div className="hidden md:block">
